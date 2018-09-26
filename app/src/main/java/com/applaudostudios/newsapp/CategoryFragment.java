@@ -74,8 +74,8 @@ public class CategoryFragment extends Fragment implements CallBack {
             mNewsList = new ArrayList<>();
 
             try {
-                JSONObject baseJsonResponse = new JSONObject(SAMPLE_JSON_RESPONSE);
-                JSONObject response = baseJsonResponse.getJSONObject("response");
+                JSONObject root = new JSONObject(SAMPLE_JSON_RESPONSE);
+                JSONObject response = root.getJSONObject("response");
                 JSONArray results = response.getJSONArray("results");
 
                 for (int i = 0; i < results.length(); i++) {
