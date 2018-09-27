@@ -12,15 +12,21 @@ import com.applaudostudios.newsapp.CallBack;
 import com.applaudostudios.newsapp.R;
 import com.applaudostudios.newsapp.model.News;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder> {
     private List<News> mData;
     private CallBack mCallBack;
 
-    public RecyclerViewAdapter(List<News> mData, CallBack mCallBack) {
-        this.mData = mData;
-        this.mCallBack = mCallBack;
+    public void setData(List<News> Data) {
+        mData = Data;
+        notifyDataSetChanged();
+    }
+
+    public RecyclerViewAdapter(CallBack CallBack) {
+        mData = new ArrayList<>();
+        mCallBack = CallBack;
     }
 
     @NonNull
@@ -44,7 +50,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         private TextView mHeadline;
         private ConstraintLayout mItemNew;
 
-        public MyViewHolder(View itemView) {
+        private MyViewHolder(View itemView) {
             super(itemView);
             mHeadline = itemView.findViewById(R.id.headline);
             mItemNew = itemView.findViewById(R.id.news_item_id);

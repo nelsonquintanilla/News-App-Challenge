@@ -5,7 +5,6 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-
 import com.applaudostudios.newsapp.adapters.FragmentPagerAdapter;
 
 public class MainActivity extends AppCompatActivity {
@@ -19,14 +18,9 @@ public class MainActivity extends AppCompatActivity {
         ViewPager viewPager = findViewById(R.id.viewpager);
         FragmentPagerAdapter adapter = new FragmentPagerAdapter(getSupportFragmentManager());
 
-        // Adds each fragment into the adapter and assigns the name of the tabs
-        adapter.AddFragment(new CategoryFragment(), "Tab1");
-        adapter.AddFragment(new CategoryFragment(), "Tab2");
-        adapter.AddFragment(new CategoryFragment(), "Tab3");
-        adapter.AddFragment(new CategoryFragment(), "Tab4");
-
         //Sets the adapter to the ViewPager
         viewPager.setAdapter(adapter);
+        viewPager.getCurrentItem();
 
         // Attaches the TabLayout to the ViewPager
         tabLayout.setupWithViewPager(viewPager);
@@ -36,7 +30,6 @@ public class MainActivity extends AppCompatActivity {
         if (actionBar != null) {
             actionBar.setElevation(0);
         }
-
     }
 
 

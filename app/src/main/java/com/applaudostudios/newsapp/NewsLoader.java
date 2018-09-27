@@ -1,26 +1,33 @@
 package com.applaudostudios.newsapp;
 
-import android.content.AsyncTaskLoader;
 import android.content.Context;
+import android.support.v4.content.AsyncTaskLoader;
 
-public class NewsLoader extends AsyncTaskLoader<String> {
+import com.applaudostudios.newsapp.model.News;
 
-    private String mQueryString;
+import java.util.List;
 
-    public NewsLoader(Context context, String queryString) {
+public class NewsLoader extends AsyncTaskLoader<List<News>> {
+
+    /** Query URL */
+    private String mUrl;
+
+    public NewsLoader(Context context, String url) {
         super(context);
-        mQueryString = queryString;
+        mUrl = url;
     }
 
     @Override
     protected void onStartLoading() {
-        super.onStartLoading();
-
         forceLoad();
     }
 
     @Override
-    public String loadInBackground() {
-        return NetworkUtils.getNewsInfo(mQueryString);
+    public List<News> loadInBackground() {
+        if (mUrl == null) {
+            return null;
+        }
+        // Perform the network request, parse the response, and extract a list of news.
+        return QueryUtils.fetchEarthquakeData(mUrl);
     }
 }
