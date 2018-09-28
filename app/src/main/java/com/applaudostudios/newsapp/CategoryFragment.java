@@ -22,29 +22,24 @@ import java.util.List;
  * A simple {@link Fragment} subclass.
  */
 public class CategoryFragment extends Fragment implements CallBack, LoaderManager.LoaderCallbacks<List<News>> {
-    public static final String GUARDIAN_REQUEST_URL =
-            "https://content.guardianapis.com/search?show-fields=headline&page=1&page-size=10&q=sports&api-key=f8bc1c2f-a416-4927-b866-b05b70de8f11";
 
     public static final int NEWS_LOADER_ID = 1;
     private TextView mEmptyStateTextView;
-
     private String title;
     private int page;
-
     private View mView;
-    private List<News> mNewsList;
-
-    RecyclerViewAdapter recyclerViewAdapter;
+    private RecyclerViewAdapter recyclerViewAdapter;
 
     public CategoryFragment() {
         // Required empty public constructor
     }
 
-    public static CategoryFragment newInstance(int page, String title){
+    public static CategoryFragment newInstance(int page, String title, String url){
         CategoryFragment categoryFragment = new CategoryFragment();
         Bundle args = new Bundle();
         args.putInt("someInt", page);
         args.putString("someTitle", title);
+        args.putString("someUrl", url);
         categoryFragment.setArguments(args);
         return categoryFragment;
     }
@@ -79,7 +74,7 @@ public class CategoryFragment extends Fragment implements CallBack, LoaderManage
     @NonNull
     @Override
     public Loader<List<News>> onCreateLoader(int id, @Nullable Bundle args) {
-        return new NewsLoader(getActivity(), GUARDIAN_REQUEST_URL);
+        return new NewsLoader(getActivity(), getArguments().getString("someUrl"));
     }
 
     @Override
@@ -87,7 +82,6 @@ public class CategoryFragment extends Fragment implements CallBack, LoaderManage
         View loadingIndicator = getView().findViewById(R.id.loading_indicator);
         loadingIndicator.setVisibility(View.GONE);
         recyclerViewAdapter.setData(data);
-//        mNewsList.addAll(data);
     }
 
     @Override
