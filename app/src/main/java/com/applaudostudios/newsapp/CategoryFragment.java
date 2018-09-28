@@ -23,11 +23,9 @@ import java.util.List;
  */
 public class CategoryFragment extends Fragment implements CallBack, LoaderManager.LoaderCallbacks<List<News>> {
 
-//    public static final int NEWS_LOADER_ID = 1;
     private TextView mEmptyStateTextView;
-//    private String title;
 
-    private int id;
+    public static final int NEWS_LOADER_ID = 1;
     private int page;
     private View mView;
     private RecyclerViewAdapter recyclerViewAdapter;
@@ -37,13 +35,11 @@ public class CategoryFragment extends Fragment implements CallBack, LoaderManage
         // Required empty public constructor
     }
 
-    public static CategoryFragment newInstance(int page, String url, int id){
+    public static CategoryFragment newInstance(int page, String url){
         CategoryFragment categoryFragment = new CategoryFragment();
         Bundle args = new Bundle();
         args.putInt("someInt", page);
-//        args.putString("someTitle", title);
         args.putString("someUrl", url);
-        args.putInt("someId", id);
         categoryFragment.setArguments(args);
         return categoryFragment;
     }
@@ -52,10 +48,8 @@ public class CategoryFragment extends Fragment implements CallBack, LoaderManage
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         page = getArguments().getInt("someInt", 0);
-        id = getArguments().getInt("someId", 0);
-//        title = getArguments().getString("someTitle");
         LoaderManager loaderManager = getLoaderManager();
-        loaderManager.restartLoader(id, null, this);
+        loaderManager.restartLoader(NEWS_LOADER_ID, null, this);
     }
 
     @Override
@@ -91,8 +85,6 @@ public class CategoryFragment extends Fragment implements CallBack, LoaderManage
 
     @Override
     public void onLoaderReset(@NonNull Loader<List<News>> loader) {
-//        mNewsList.clear();
     }
-
 
 }
