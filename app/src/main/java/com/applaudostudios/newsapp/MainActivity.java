@@ -18,11 +18,11 @@ public class MainActivity extends AppCompatActivity {
         ViewPager viewPager = findViewById(R.id.viewpager);
         FragmentPagerAdapter adapter = new FragmentPagerAdapter(getSupportFragmentManager());
 
-        adapter.addFragment("Sports", CategoryFragment.newInstance(0, FragmentPagerAdapter.SPORTS_URL));
-        adapter.addFragment("Politics", CategoryFragment.newInstance(1, FragmentPagerAdapter.POLITICS_URL));
-        adapter.addFragment("Business", CategoryFragment.newInstance(2, FragmentPagerAdapter.BUSINESS_URL));
-        adapter.addFragment("Tech", CategoryFragment.newInstance(3, FragmentPagerAdapter.TECH_URL));
-        adapter.addFragment("World", CategoryFragment.newInstance(4, FragmentPagerAdapter.WORLD_URL));
+        adapter.addFragment("Sports", CategoryFragment.newInstance(0, FragmentPagerAdapter.SPORTS_URL, FragmentPagerAdapter.SPORTS_ID));
+        adapter.addFragment("Politics", CategoryFragment.newInstance(1, FragmentPagerAdapter.POLITICS_URL, FragmentPagerAdapter.POLITICS_ID));
+        adapter.addFragment("Business", CategoryFragment.newInstance(2, FragmentPagerAdapter.BUSINESS_URL, FragmentPagerAdapter.BUSINESS_ID));
+        adapter.addFragment("Tech", CategoryFragment.newInstance(3, FragmentPagerAdapter.TECH_URL, FragmentPagerAdapter.TECH_ID));
+        adapter.addFragment("World", CategoryFragment.newInstance(4, FragmentPagerAdapter.WORLD_URL, FragmentPagerAdapter.WORLD_ID));
 
         //Sets the adapter to the ViewPager
         viewPager.setAdapter(adapter);

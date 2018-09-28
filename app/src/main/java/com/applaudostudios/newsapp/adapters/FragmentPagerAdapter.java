@@ -13,18 +13,20 @@ public class FragmentPagerAdapter extends FragmentStatePagerAdapter {
 
     private static int NUM_ITEMS = 5;
 
+    public static final int SPORTS_ID = 1;
+    public static final int POLITICS_ID = 2;
+    public static final int BUSINESS_ID = 3;
+    public static final int TECH_ID = 4;
+    public static final int WORLD_ID = 5;
+
     public static final String SPORTS_URL =
             "https://content.guardianapis.com/search?show-fields=headline&page=1&page-size=30&q=sports&api-key=f8bc1c2f-a416-4927-b866-b05b70de8f11";
-
     public static final String POLITICS_URL =
             "https://content.guardianapis.com/search?show-fields=headline&page=1&page-size=30&q=politics&api-key=f8bc1c2f-a416-4927-b866-b05b70de8f11";
-
     public static final String BUSINESS_URL =
             "https://content.guardianapis.com/search?show-fields=headline&page=1&page-size=30&q=business&api-key=f8bc1c2f-a416-4927-b866-b05b70de8f11";
-
     public static final String TECH_URL =
             "https://content.guardianapis.com/search?show-fields=headline&page=1&page-size=30&q=tech&api-key=f8bc1c2f-a416-4927-b866-b05b70de8f11";
-
     public static final String WORLD_URL =
             "https://content.guardianapis.com/search?show-fields=headline&page=1&page-size=30&q=world&api-key=f8bc1c2f-a416-4927-b866-b05b70de8f11";
 

@@ -23,9 +23,11 @@ import java.util.List;
  */
 public class CategoryFragment extends Fragment implements CallBack, LoaderManager.LoaderCallbacks<List<News>> {
 
-    public static final int NEWS_LOADER_ID = 1;
+//    public static final int NEWS_LOADER_ID = 1;
     private TextView mEmptyStateTextView;
 //    private String title;
+
+    private int id;
     private int page;
     private View mView;
     private RecyclerViewAdapter recyclerViewAdapter;
@@ -35,12 +37,13 @@ public class CategoryFragment extends Fragment implements CallBack, LoaderManage
         // Required empty public constructor
     }
 
-    public static CategoryFragment newInstance(int page, String url){
+    public static CategoryFragment newInstance(int page, String url, int id){
         CategoryFragment categoryFragment = new CategoryFragment();
         Bundle args = new Bundle();
         args.putInt("someInt", page);
 //        args.putString("someTitle", title);
         args.putString("someUrl", url);
+        args.putInt("someId", id);
         categoryFragment.setArguments(args);
         return categoryFragment;
     }
@@ -49,9 +52,10 @@ public class CategoryFragment extends Fragment implements CallBack, LoaderManage
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         page = getArguments().getInt("someInt", 0);
+        id = getArguments().getInt("someId", 0);
 //        title = getArguments().getString("someTitle");
         LoaderManager loaderManager = getLoaderManager();
-        loaderManager.restartLoader(NEWS_LOADER_ID, null, this);
+        loaderManager.restartLoader(id, null, this);
     }
 
     @Override
@@ -80,8 +84,8 @@ public class CategoryFragment extends Fragment implements CallBack, LoaderManage
 
     @Override
     public void onLoadFinished(@NonNull Loader<List<News>> loader, List<News> data) {
-        View loadingIndicator = getView().findViewById(R.id.loading_indicator);
-        loadingIndicator.setVisibility(View.GONE);
+//        View loadingIndicator = getView().findViewById(R.id.loading_indicator);
+//        loadingIndicator.setVisibility(View.GONE);
         recyclerViewAdapter.setData(data);
     }
 
