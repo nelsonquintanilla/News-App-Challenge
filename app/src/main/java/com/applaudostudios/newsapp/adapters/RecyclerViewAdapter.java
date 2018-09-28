@@ -19,6 +19,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private List<News> mData;
     private CallBack mCallBack;
 
+    // When this method is called in the CategoryFragment, the  notifyDataSetChanged() method
+    // is causing the execution of all RecyclerViewAdapter methods again, so that the data is
+    // passed in and bound to the holders.
     public void setData(List<News> Data) {
         mData = Data;
         notifyDataSetChanged();

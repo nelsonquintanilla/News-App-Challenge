@@ -68,9 +68,9 @@ public class QueryUtils {
             // Opens the URL connection and makes the request.
             urlConnection = (HttpURLConnection) url.openConnection();
             // Sets the read timeout to a specified timeout, in milliseconds.
-//            urlConnection.setReadTimeout(10000);
+            urlConnection.setReadTimeout(10000);
             // Sets a specified timeout value, in milliseconds.
-//            urlConnection.setConnectTimeout(15000);
+            urlConnection.setConnectTimeout(15000);
             // Set the method for the URL request.
             urlConnection.setRequestMethod("GET");
             // Establishes http connection with the server.

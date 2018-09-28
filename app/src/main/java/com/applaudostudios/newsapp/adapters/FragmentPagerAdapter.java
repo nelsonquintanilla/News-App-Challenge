@@ -6,6 +6,9 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import com.applaudostudios.newsapp.CategoryFragment;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class FragmentPagerAdapter extends FragmentStatePagerAdapter {
 
     private static int NUM_ITEMS = 5;
@@ -25,28 +28,20 @@ public class FragmentPagerAdapter extends FragmentStatePagerAdapter {
     public static final String WORLD_URL =
             "https://content.guardianapis.com/search?show-fields=headline&page=1&page-size=30&q=world&api-key=f8bc1c2f-a416-4927-b866-b05b70de8f11";
 
+    private List<CategoryFragment> fragmentList;
+
+    private List<String> titlesList;
+
     public FragmentPagerAdapter(FragmentManager fm) {
         super(fm);
+        fragmentList = new ArrayList<>();
+        titlesList = new ArrayList<>();
     }
 
     // Returns a fragment associated wih each position
     @Override
     public Fragment getItem(int position) {
-        switch (position) {
-            case 0:
-                return CategoryFragment.newInstance(0, "Sports", SPORTS_URL);
-            case 1:
-                return CategoryFragment.newInstance(1, "Politics", POLITICS_URL);
-            case 2:
-                return CategoryFragment.newInstance(2, "Business", BUSINESS_URL);
-            case 3:
-                return CategoryFragment.newInstance(3, "Tech", TECH_URL);
-            case 4:
-                return CategoryFragment.newInstance(4, "World", WORLD_URL);
-            default:
-                break;
-        }
-        return null;
+     return fragmentList.get(position);
     }
 
     // Returns the number of pages in the ViewPager
@@ -59,6 +54,11 @@ public class FragmentPagerAdapter extends FragmentStatePagerAdapter {
     @Nullable
     @Override
     public CharSequence getPageTitle(int position) {
-        return "page" + position;
+        return titlesList.get(position);
+    }
+
+    public void addFragment(String title, CategoryFragment fragment){
+        fragmentList.add(fragment);
+        titlesList.add(title);
     }
 }

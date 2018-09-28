@@ -25,20 +25,21 @@ public class CategoryFragment extends Fragment implements CallBack, LoaderManage
 
     public static final int NEWS_LOADER_ID = 1;
     private TextView mEmptyStateTextView;
-    private String title;
+//    private String title;
     private int page;
     private View mView;
     private RecyclerViewAdapter recyclerViewAdapter;
+
 
     public CategoryFragment() {
         // Required empty public constructor
     }
 
-    public static CategoryFragment newInstance(int page, String title, String url){
+    public static CategoryFragment newInstance(int page, String url){
         CategoryFragment categoryFragment = new CategoryFragment();
         Bundle args = new Bundle();
         args.putInt("someInt", page);
-        args.putString("someTitle", title);
+//        args.putString("someTitle", title);
         args.putString("someUrl", url);
         categoryFragment.setArguments(args);
         return categoryFragment;
@@ -48,9 +49,9 @@ public class CategoryFragment extends Fragment implements CallBack, LoaderManage
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         page = getArguments().getInt("someInt", 0);
-        title = getArguments().getString("someTitle");
+//        title = getArguments().getString("someTitle");
         LoaderManager loaderManager = getLoaderManager();
-        loaderManager.initLoader(NEWS_LOADER_ID, null, this);
+        loaderManager.restartLoader(NEWS_LOADER_ID, null, this);
     }
 
     @Override
@@ -88,4 +89,6 @@ public class CategoryFragment extends Fragment implements CallBack, LoaderManage
     public void onLoaderReset(@NonNull Loader<List<News>> loader) {
 //        mNewsList.clear();
     }
+
+
 }
