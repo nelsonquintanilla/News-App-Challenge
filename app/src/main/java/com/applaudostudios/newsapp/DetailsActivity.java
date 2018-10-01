@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
 import com.applaudostudios.newsapp.model.News;
@@ -25,6 +27,11 @@ public class DetailsActivity extends AppCompatActivity {
 
         mNews = getIntent().getParcelableExtra(EXTRA_DETAIL);
 
-        DetailsFragment.newInstance(mNews);
+        DetailsFragment fragment = DetailsFragment.newInstance(mNews);
+
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.add(R.id.fragment_container, fragment);
+        fragmentTransaction.commit();
     }
 }

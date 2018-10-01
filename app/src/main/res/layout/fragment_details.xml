@@ -26,7 +26,10 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:text="Headline"
-            android:layout_below="@id/thumbnail_image" />
+            android:layout_below="@id/thumbnail_image"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:gravity="center_horizontal"/>
 
         <TextView
             android:id="@+id/bodytext_text_view"
@@ -37,7 +40,10 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:text="BodyText"
-            android:layout_below="@id/headline_text_view" />
+            android:layout_below="@id/headline_text_view"
+            android:textSize="15sp"
+            android:gravity="fill_horizontal"/>
+
     </RelativeLayout>
 
 </ScrollView>
