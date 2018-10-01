@@ -41,7 +41,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.mHeadline.setText(mData.get(position).getTitle());
+        holder.mHeadline.setText(mData.get(position).getHeadline());
     }
 
     @Override
@@ -62,7 +62,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         @Override
         public void onClick(View view) {
-//            mCallBack.onItemClick(getAdapterPosition());
+            mCallBack.onItemClick(getAdapterPosition());
         }
     }
 

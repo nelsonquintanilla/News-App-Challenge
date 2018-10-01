@@ -1,17 +1,71 @@
 package com.applaudostudios.newsapp.model;
 
-public class News {
-    private String mTitle;
+import android.os.Parcel;
+import android.os.Parcelable;
 
-    public String getTitle() {
-        return mTitle;
+public class News implements Parcelable {
+
+    private String mHeadline;
+    private String mBodyText;
+    private String mThumbnail;
+
+    public News(String headline, String bodyText, String thumbnail) {
+        mHeadline = headline;
+        mBodyText = bodyText;
+        mThumbnail = thumbnail;
     }
 
-    public void setTitle(String mTitle) {
-        this.mTitle = mTitle;
+    public String getHeadline() {
+        return mHeadline;
     }
 
-    public News(String headline) {
-        this.mTitle = headline;
+    public void setHeadline(String mTitle) {
+        this.mHeadline = mTitle;
     }
+
+    public String getBodyText() {
+        return mBodyText;
+    }
+
+    public void setBodyText(String mBodyText) {
+        this.mBodyText = mBodyText;
+    }
+
+    public String getThumbnail() {
+        return mThumbnail;
+    }
+
+    public void setThumbnail(String mThumbnail) {
+        this.mThumbnail = mThumbnail;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.mHeadline);
+        dest.writeString(this.mBodyText);
+        dest.writeString(this.mThumbnail);
+    }
+
+    protected News(Parcel in) {
+        this.mHeadline = in.readString();
+        this.mBodyText = in.readString();
+        this.mThumbnail = in.readString();
+    }
+
+    public static final Parcelable.Creator<News> CREATOR = new Parcelable.Creator<News>() {
+        @Override
+        public News createFromParcel(Parcel source) {
+            return new News(source);
+        }
+
+        @Override
+        public News[] newArray(int size) {
+            return new News[size];
+        }
+    };
 }

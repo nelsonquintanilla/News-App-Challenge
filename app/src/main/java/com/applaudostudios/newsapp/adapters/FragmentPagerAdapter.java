@@ -4,6 +4,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+
 import com.applaudostudios.newsapp.CategoryFragment;
 
 public class FragmentPagerAdapter extends FragmentStatePagerAdapter {
@@ -15,14 +16,15 @@ public class FragmentPagerAdapter extends FragmentStatePagerAdapter {
         super(fm);
     }
 
-    public String buildUrl(String q){
-        return "https://content.guardianapis.com/search?show-fields=headline&page=1&page-size=30&q=" + q + "&api-key=f8bc1c2f-a416-4927-b866-b05b70de8f11";
+    public String buildUrl(String q) {
+        return "https://content.guardianapis.com/search?show-fields=headline%2Cthumbnail%2CbodyText&page=1&page-size=30&q="
+                + q + "&api-key=f8bc1c2f-a416-4927-b866-b05b70de8f11";
     }
 
     // Returns a fragment associated wih each position
     @Override
     public Fragment getItem(int position) {
-     return CategoryFragment.newInstance(position, buildUrl(mTitles[position]));
+        return CategoryFragment.newInstance(position, buildUrl(mTitles[position]));
     }
 
     // Returns the number of pages in the ViewPager
@@ -36,6 +38,6 @@ public class FragmentPagerAdapter extends FragmentStatePagerAdapter {
     @Override
     public CharSequence getPageTitle(int position) {
         return mTitles[position];
-}
+    }
 
 }

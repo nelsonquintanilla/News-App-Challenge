@@ -25,6 +25,7 @@ public class CategoryFragment extends Fragment implements CallBack, LoaderManage
 
     private TextView mEmptyStateTextView;
 
+    private List<News> mData;
     public static final int NEWS_LOADER_ID = 1;
     private int page;
     private View mView;
@@ -65,11 +66,6 @@ public class CategoryFragment extends Fragment implements CallBack, LoaderManage
         return mView;
     }
 
-    @Override
-    public void onItemClick(int position) {
-//        startActivity(DetailsActivity.getInstance(getContext(), mNewsList.get(position)));
-    }
-
     @NonNull
     @Override
     public Loader<List<News>> onCreateLoader(int id, @Nullable Bundle args) {
@@ -81,10 +77,17 @@ public class CategoryFragment extends Fragment implements CallBack, LoaderManage
 //        View loadingIndicator = getView().findViewById(R.id.loading_indicator);
 //        loadingIndicator.setVisibility(View.GONE);
         recyclerViewAdapter.setData(data);
+        mData = data;
     }
 
     @Override
     public void onLoaderReset(@NonNull Loader<List<News>> loader) {
+    }
+
+
+    @Override
+    public void onItemClick(int position) {
+        startActivity(DetailsActivity.putNews(getContext(), mData.get(position)));
     }
 
 }

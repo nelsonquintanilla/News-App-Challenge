@@ -132,9 +132,17 @@ public class QueryUtils {
                 JSONObject currentNews = results.getJSONObject(i);
                 JSONObject fields = currentNews.getJSONObject("fields");
 
-                String headline = fields.getString("headline");
+                News news = new News("", "", "");
 
-                News news = new News(headline);
+                if(fields.has("headline"))
+                    news.setHeadline(fields.getString("headline"));
+
+                if(fields.has("bodyText"))
+                    news.setBodyText(fields.getString("bodyText"));
+
+                if(fields.has("thumbnail"))
+                    news.setThumbnail(fields.getString("thumbnail"));
+
                 newsList.add(news);
             }
         } catch (JSONException e) {
