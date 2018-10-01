@@ -74,8 +74,8 @@ public class CategoryFragment extends Fragment implements CallBack, LoaderManage
 
     @Override
     public void onLoadFinished(@NonNull Loader<List<News>> loader, List<News> data) {
-//        View loadingIndicator = getView().findViewById(R.id.loading_indicator);
-//        loadingIndicator.setVisibility(View.GONE);
+        View loadingIndicator = getView().findViewById(R.id.loading_indicator);
+        loadingIndicator.setVisibility(View.GONE);
         recyclerViewAdapter.setData(data);
         mData = data;
     }
