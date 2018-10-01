@@ -1,7 +1,9 @@
 package com.applaudostudios.newsapp;
 
 
+import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -22,10 +24,11 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class DetailsFragment extends Fragment implements LoaderManager.LoaderCallbacks<Bitmap> {
+public class DetailsFragment extends Fragment implements LoaderManager.LoaderCallbacks<Bitmap>, View.OnClickListener {
     private News mNews;
     private String mHeadline;
     private String mBodyText;
+    private String mWebUrl;
     private ImageView thumbnail;
     private View mView;
     public static final int THUMBNAIL_LOADER_ID = 2;
@@ -50,6 +53,7 @@ public class DetailsFragment extends Fragment implements LoaderManager.LoaderCal
         mNews = getArguments().getParcelable("NEWS_KEY");
         mHeadline = mNews.getHeadline();
         mBodyText = mNews.getBodyText();
+        mWebUrl = mNews.getWebUrl();
         LoaderManager loaderManager = getLoaderManager();
         loaderManager.restartLoader(THUMBNAIL_LOADER_ID, null, this);
     }
@@ -65,6 +69,8 @@ public class DetailsFragment extends Fragment implements LoaderManager.LoaderCal
        bodyText.setText(mBodyText);
        thumbnail = mView.findViewById(R.id.thumbnail_image);
        thumbnail.setVisibility(View.INVISIBLE);
+       ImageView webUrlImage = mView.findViewById(R.id.web_url_image);
+       webUrlImage.setOnClickListener(this);
        return mView;
     }
 
@@ -84,6 +90,19 @@ public class DetailsFragment extends Fragment implements LoaderManager.LoaderCal
     @Override
     public void onLoaderReset(@NonNull Loader<Bitmap> loader) {
         // Empty.
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.web_url_image:
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(mWebUrl));
+                startActivity(i);
+                break;
+            default:
+                break;
+        }
     }
 
 }

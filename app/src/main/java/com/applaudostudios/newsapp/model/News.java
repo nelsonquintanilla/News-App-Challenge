@@ -8,11 +8,13 @@ public class News implements Parcelable {
     private String mHeadline;
     private String mBodyText;
     private String mThumbnail;
+    private String mWebUrl;
 
-    public News(String headline, String bodyText, String thumbnail) {
-        mHeadline = headline;
-        mBodyText = bodyText;
-        mThumbnail = thumbnail;
+    public News(String mHeadline, String mBodyText, String mThumbnail, String mWebUrl) {
+        this.mHeadline = mHeadline;
+        this.mBodyText = mBodyText;
+        this.mThumbnail = mThumbnail;
+        this.mWebUrl = mWebUrl;
     }
 
     public String getHeadline() {
@@ -39,6 +41,15 @@ public class News implements Parcelable {
         this.mThumbnail = mThumbnail;
     }
 
+    public String getWebUrl() {
+        return mWebUrl;
+    }
+
+    public void setWebUrl(String mWebUrl) {
+        this.mWebUrl = mWebUrl;
+    }
+
+
     @Override
     public int describeContents() {
         return 0;
@@ -49,12 +60,14 @@ public class News implements Parcelable {
         dest.writeString(this.mHeadline);
         dest.writeString(this.mBodyText);
         dest.writeString(this.mThumbnail);
+        dest.writeString(this.mWebUrl);
     }
 
     protected News(Parcel in) {
         this.mHeadline = in.readString();
         this.mBodyText = in.readString();
         this.mThumbnail = in.readString();
+        this.mWebUrl = in.readString();
     }
 
     public static final Parcelable.Creator<News> CREATOR = new Parcelable.Creator<News>() {

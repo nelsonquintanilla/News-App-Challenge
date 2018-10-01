@@ -129,10 +129,13 @@ public class QueryUtils {
             JSONArray results = response.getJSONArray("results");
 
             for (int i = 0; i < results.length(); i++) {
+                News news = new News("", "", "", "");
+
                 JSONObject currentNews = results.getJSONObject(i);
                 JSONObject fields = currentNews.getJSONObject("fields");
 
-                News news = new News("", "", "");
+                if(currentNews.has("webUrl"))
+                    news.setWebUrl(currentNews.getString("webUrl"));
 
                 if(fields.has("headline"))
                     news.setHeadline(fields.getString("headline"));
