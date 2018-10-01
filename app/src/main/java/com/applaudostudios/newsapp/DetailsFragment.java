@@ -1,6 +1,5 @@
 package com.applaudostudios.newsapp;
 
-
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -19,7 +18,6 @@ import android.widget.TextView;
 import com.applaudostudios.newsapp.model.News;
 
 import java.util.List;
-
 
 /**
  * A simple {@link Fragment} subclass.

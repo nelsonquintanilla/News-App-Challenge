@@ -148,6 +148,7 @@ public class QueryUtils {
 
                 newsList.add(news);
             }
+
         } catch (JSONException e) {
             Log.e("QueryUtils", "Problem parsing the news JSON results", e);
         }

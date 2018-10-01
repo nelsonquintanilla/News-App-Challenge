@@ -3,17 +3,11 @@ package com.applaudostudios.newsapp;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.media.Image;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.AsyncTaskLoader;
 import android.util.Log;
-import android.widget.ImageView;
-
-import com.applaudostudios.newsapp.model.News;
-
 import java.io.InputStream;
-import java.util.List;
 
 public class ThumbnailLoader extends AsyncTaskLoader<Bitmap> {
 
