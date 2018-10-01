@@ -82,6 +82,7 @@ public class CategoryFragment extends Fragment implements CallBack, LoaderManage
 
     @Override
     public void onLoaderReset(@NonNull Loader<List<News>> loader) {
+        // Empty.
     }
 
 

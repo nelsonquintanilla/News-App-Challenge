@@ -27,7 +27,7 @@ public class DetailsActivity extends AppCompatActivity {
 
         mNews = getIntent().getParcelableExtra(EXTRA_DETAIL);
 
-        DetailsFragment fragment = DetailsFragment.newInstance(mNews);
+        DetailsFragment fragment = DetailsFragment.newInstance(mNews, mNews.getThumbnail());
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
