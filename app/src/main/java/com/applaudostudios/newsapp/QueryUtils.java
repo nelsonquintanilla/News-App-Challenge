@@ -28,10 +28,10 @@ public class QueryUtils {
     }
 
     public static List<News> fetchEarthquakeData(String requestUrl) {
-        // Create URL object
+        // Creates URL object
         URL url = createUrl(requestUrl);
 
-        // Perform HTTP request to the URL and receive a JSON response back
+        // Performs HTTP request to the URL and receives a JSON response back
         String jsonResponse = null;
         try {
             jsonResponse = makeHttpRequest(url);
@@ -42,6 +42,9 @@ public class QueryUtils {
         return extractResultFromJson(jsonResponse);
     }
 
+    /**
+     * Returns new URL object from the given string URL.
+     */
     private static URL createUrl(String stringUrl) {
         URL url = null;
         try {
@@ -52,10 +55,13 @@ public class QueryUtils {
         return url;
     }
 
+    /**
+     * Makes an HTTP request to the given URL and returns a String as the response.
+     */
     private static String makeHttpRequest(URL url) throws IOException {
         String jsonResponse = "";
 
-        // If the URL is null, then return early.
+        // If the URL is null, then returns early.
         if (url == null) {
             return jsonResponse;
         }
@@ -79,7 +85,7 @@ public class QueryUtils {
             // Receiving the response and making sense of it for our app.
             //
             // If the request was successful (response code 200),
-            // then read the input stream and parse the response.
+            // then reads the input stream and parse the response.
             if (urlConnection.getResponseCode() == 200) {
                 inputStream = urlConnection.getInputStream();
                 jsonResponse = readFromStream(inputStream);
@@ -102,6 +108,9 @@ public class QueryUtils {
         return jsonResponse;
     }
 
+    /**
+     * Convert the inpuStream into a String which contains the whole JSON response from the server.
+     */
     private static String readFromStream(InputStream inputStream) throws IOException {
         StringBuilder output = new StringBuilder();
         if (inputStream != null) {
@@ -116,6 +125,9 @@ public class QueryUtils {
         return output.toString();
     }
 
+    /**
+     * Returns a list of news objects that has been built up from parsing the given JSON response.
+     */
     private static List<News> extractResultFromJson(String newsJson) {
 
         if (TextUtils.isEmpty(newsJson)) {

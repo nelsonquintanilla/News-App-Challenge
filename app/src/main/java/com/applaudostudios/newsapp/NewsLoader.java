@@ -21,6 +21,7 @@ public class NewsLoader extends AsyncTaskLoader<List<News>> {
 
     @Override
     protected void onStartLoading() {
+        // Starts the load of the AsyncTask
         forceLoad();
     }
 

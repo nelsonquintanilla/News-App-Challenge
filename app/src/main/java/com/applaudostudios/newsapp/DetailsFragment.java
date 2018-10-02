@@ -34,6 +34,8 @@ public class DetailsFragment extends Fragment implements LoaderManager.LoaderCal
         // Required empty public constructor
     }
 
+    // Creates a new instance of the fragment and takes as arguments an url (the thumbnail url)
+    // and the details of the news clicked.
     public static DetailsFragment newInstance(News news, String url) {
         Bundle args = new Bundle();
         args.putParcelable("NEWS_KEY", news);
@@ -50,6 +52,7 @@ public class DetailsFragment extends Fragment implements LoaderManager.LoaderCal
         mHeadline = Objects.requireNonNull(mNews).getHeadline();
         mBodyText = mNews.getBodyText();
         mWebUrl = mNews.getWebUrl();
+        // Declares loadManager
         LoaderManager loaderManager = getLoaderManager();
         loaderManager.restartLoader(THUMBNAIL_LOADER_ID, null, this);
     }
@@ -57,8 +60,9 @@ public class DetailsFragment extends Fragment implements LoaderManager.LoaderCal
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+        // Inflates the layout for this fragment
         View mView = inflater.inflate(R.layout.fragment_details, container, false);
+
         TextView headline = mView.findViewById(R.id.headline_text_view);
         headline.setText(mHeadline);
         TextView bodyText = mView.findViewById(R.id.bodytext_text_view);
@@ -70,7 +74,7 @@ public class DetailsFragment extends Fragment implements LoaderManager.LoaderCal
         return mView;
     }
 
-
+    // Methods required because of the implementation of the LoaderCallbacks interface
     @NonNull
     @Override
     public Loader<Bitmap> onCreateLoader(int id, @Nullable Bundle args) {
@@ -89,6 +93,7 @@ public class DetailsFragment extends Fragment implements LoaderManager.LoaderCal
         // Empty.
     }
 
+    // Makes the intent to open the url in a browser when the webUrl image is clicked.
     @Override
     public void onClick(View view) {
         switch (view.getId()) {

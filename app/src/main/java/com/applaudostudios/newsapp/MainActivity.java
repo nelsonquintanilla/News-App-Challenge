@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         // Attaches the TabLayout to the ViewPager
         tabLayout.setupWithViewPager(viewPager);
 
-        // Remove shadow from the action bar
+        // Removes shadow from the action bar
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setElevation(0);

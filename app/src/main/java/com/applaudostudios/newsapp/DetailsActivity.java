@@ -14,6 +14,7 @@ import com.applaudostudios.newsapp.model.News;
 public class DetailsActivity extends AppCompatActivity {
     private static final String EXTRA_DETAIL = "EXTRA_DETAIL";
 
+    // Makes the intent to start the details activity and pass in the details of the news clicked.
     public static Intent putNews(Context context, News news) {
         Intent intent = new Intent(context, DetailsActivity.class);
         intent.putExtra(EXTRA_DETAIL, news);
@@ -25,10 +26,14 @@ public class DetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
 
+        // Getting the details of the news clicked.
         News mNews = getIntent().getParcelableExtra(EXTRA_DETAIL);
 
+        // Creates a new instance of the details fragment and pass in the news details to show them
+        // in there.
         DetailsFragment fragment = DetailsFragment.newInstance(mNews, mNews.getThumbnail());
 
+        // To communicate between this activity and the fragment created above.
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.add(R.id.fragment_container, fragment);

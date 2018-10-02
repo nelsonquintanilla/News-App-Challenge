@@ -10,6 +10,7 @@ import android.util.Log;
 
 import java.io.InputStream;
 
+// Loader in charge of retrieving the image (thumbnail) of the news clicked
 public class ThumbnailLoader extends AsyncTaskLoader<Bitmap> {
 
     private String mUrl;
