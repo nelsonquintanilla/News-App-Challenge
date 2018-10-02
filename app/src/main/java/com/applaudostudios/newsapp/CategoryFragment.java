@@ -35,6 +35,12 @@ public class CategoryFragment extends Fragment implements CallBack, LoaderManage
         // Required empty public constructor
     }
 
+    /**
+     * Creates a fragment depending on the category that it takes as an argument.
+     *
+     * @param url in this case, it's an url build by the buildUrl method
+     * @return an instance of CategoryFragment
+     */
     public static CategoryFragment newInstance(String url) {
         CategoryFragment categoryFragment = new CategoryFragment();
         Bundle args = new Bundle();
@@ -54,10 +60,10 @@ public class CategoryFragment extends Fragment implements CallBack, LoaderManage
                              Bundle savedInstanceState) {
         View mView = inflater.inflate(R.layout.fragment_category, container, false);
 
-        // Inflate the layout for this fragment
+        // Inflates the layout for this fragment
         TextView mEmptyStateTextView = mView.findViewById(R.id.empty_view);
 
-        // Check the status of the network connection.
+        // Checks the status of the network connection
         ConnectivityManager connMgr = (ConnectivityManager)
                 Objects.requireNonNull(getActivity()).getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = null;
@@ -65,28 +71,28 @@ public class CategoryFragment extends Fragment implements CallBack, LoaderManage
             networkInfo = connMgr.getActiveNetworkInfo();
         }
 
-        // If there is a network connection, fetch data
+        // If there is a network connection, fetches data
         if (networkInfo != null && networkInfo.isConnected()) {
-            // Get a reference to the LoaderManager, in order to interact with loaders.
+            // Gets a reference to the LoaderManager, in order to interact with loaders
             LoaderManager loaderManager = getLoaderManager();
 
-            // Initialize the loader. Pass in the int ID constant defined above and pass in null for
-            // the bundle. Pass in this activity for the LoaderCallbacks parameter (which is valid
-            // because this activity implements the LoaderCallbacks interface).
+            // Initializes the loader
             loaderManager.restartLoader(NEWS_LOADER_ID, null, this);
 
         } else {
-            // Otherwise, display error
-            // First, hide loading indicator so error message will be visible
+            // Otherwise, displays error
+            // First, hides loading indicator so error message will be visible
             View loadingIndicator = mView.findViewById(R.id.loading_indicator);
             loadingIndicator.setVisibility(View.GONE);
 
-            // Update empty state with no connection error message
+            // Updates empty state with no connection error message
             mEmptyStateTextView.setText(R.string.no_internet_connection);
         }
 
+        // Declares and initializes the recyclerView object
         RecyclerView myRecyclerView = mView.findViewById(R.id.recycler_view_news);
         myRecyclerView.setHasFixedSize(true);
+        // Sets up the adapter
         recyclerViewAdapter = new RecyclerViewAdapter(this);
         myRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         myRecyclerView.setAdapter(recyclerViewAdapter);
@@ -94,6 +100,7 @@ public class CategoryFragment extends Fragment implements CallBack, LoaderManage
     }
 
 
+    // Methods required because of the implementation of the LoaderCallbacks interface
     @NonNull
     @Override
     public Loader<List<News>> onCreateLoader(int id, @Nullable Bundle args) {
@@ -102,9 +109,12 @@ public class CategoryFragment extends Fragment implements CallBack, LoaderManage
 
     @Override
     public void onLoadFinished(@NonNull Loader<List<News>> loader, List<News> data) {
+        // Removing loading indicator
         View loadingIndicator = Objects.requireNonNull(getView()).findViewById(R.id.loading_indicator);
         loadingIndicator.setVisibility(View.GONE);
+        // Updates the data in the adapter
         recyclerViewAdapter.setData(data);
+        // Saving data to use it later on on the onItemClickMethod
         mData = data;
     }
 
@@ -113,6 +123,7 @@ public class CategoryFragment extends Fragment implements CallBack, LoaderManage
         // Empty.
     }
 
+    // Method required because of the CallBack interface implementation.
     @Override
     public void onItemClick(int position) {
         startActivity(DetailsActivity.putNews(getContext(), mData.get(position)));

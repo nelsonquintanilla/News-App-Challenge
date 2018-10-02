@@ -16,6 +16,12 @@ public class FragmentPagerAdapter extends FragmentStatePagerAdapter {
         super(fm);
     }
 
+    /**
+     * Builds the complete url depending on the category.
+     *
+     * @param q is the category
+     * @return the complete url to then use it when creating a new instance of the CategoryFragment
+     */
     private String buildUrl(String q) {
         return "https://content.guardianapis.com/search?show-fields=headline%2Cthumbnail%2CbodyText&page=1&page-size=30&q="
                 + q + "&api-key=f8bc1c2f-a416-4927-b866-b05b70de8f11";

@@ -61,6 +61,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             mItemNew.setOnClickListener(this);
         }
 
+        /**
+         * Implements the onItemClick method of the Callback interface which body is defined in
+         * the class that implements it (CategoryFragment)
+         *
+         * @param view the constraint layout that is root of the cardView that holds the headline
+         */
         @Override
         public void onClick(View view) {
             mCallBack.onItemClick(getAdapterPosition());
