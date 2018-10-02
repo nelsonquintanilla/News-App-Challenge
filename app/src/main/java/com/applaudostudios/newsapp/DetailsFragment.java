@@ -17,18 +17,16 @@ import android.widget.TextView;
 
 import com.applaudostudios.newsapp.model.News;
 
-import java.util.List;
+import java.util.Objects;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class DetailsFragment extends Fragment implements LoaderManager.LoaderCallbacks<Bitmap>, View.OnClickListener {
-    private News mNews;
     private String mHeadline;
     private String mBodyText;
     private String mWebUrl;
-    private ImageView thumbnail;
-    private View mView;
+    private ImageView mThumbnail;
     public static final int THUMBNAIL_LOADER_ID = 2;
 
 
@@ -48,8 +46,8 @@ public class DetailsFragment extends Fragment implements LoaderManager.LoaderCal
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mNews = getArguments().getParcelable("NEWS_KEY");
-        mHeadline = mNews.getHeadline();
+        News mNews = Objects.requireNonNull(getArguments()).getParcelable("NEWS_KEY");
+        mHeadline = Objects.requireNonNull(mNews).getHeadline();
         mBodyText = mNews.getBodyText();
         mWebUrl = mNews.getWebUrl();
         LoaderManager loaderManager = getLoaderManager();
@@ -57,32 +55,33 @@ public class DetailsFragment extends Fragment implements LoaderManager.LoaderCal
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-       mView = inflater.inflate(R.layout.fragment_details, container, false);
-       TextView headline = mView.findViewById(R.id.headline_text_view);
-       headline.setText(mHeadline);
-       TextView bodyText = mView.findViewById(R.id.bodytext_text_view);
-       bodyText.setText(mBodyText);
-       thumbnail = mView.findViewById(R.id.thumbnail_image);
-       thumbnail.setVisibility(View.INVISIBLE);
-       ImageView webUrlImage = mView.findViewById(R.id.web_url_image);
-       webUrlImage.setOnClickListener(this);
-       return mView;
+        View mView = inflater.inflate(R.layout.fragment_details, container, false);
+        TextView headline = mView.findViewById(R.id.headline_text_view);
+        headline.setText(mHeadline);
+        TextView bodyText = mView.findViewById(R.id.bodytext_text_view);
+        bodyText.setText(mBodyText);
+        mThumbnail = mView.findViewById(R.id.thumbnail_image);
+        mThumbnail.setVisibility(View.INVISIBLE);
+        ImageView webUrlImage = mView.findViewById(R.id.web_url_image);
+        webUrlImage.setOnClickListener(this);
+        return mView;
     }
 
 
     @NonNull
     @Override
     public Loader<Bitmap> onCreateLoader(int id, @Nullable Bundle args) {
-        return new ThumbnailLoader(getActivity(), getArguments().getString("someUrl"));
+        return new ThumbnailLoader(Objects.requireNonNull(getActivity()),
+                Objects.requireNonNull(getArguments()).getString("someUrl"));
     }
 
     @Override
     public void onLoadFinished(@NonNull Loader<Bitmap> loader, Bitmap data) {
-        thumbnail.setImageBitmap(data);
-        thumbnail.setVisibility(View.VISIBLE);
+        mThumbnail.setImageBitmap(data);
+        mThumbnail.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -92,7 +91,7 @@ public class DetailsFragment extends Fragment implements LoaderManager.LoaderCal
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.web_url_image:
                 Intent i = new Intent(Intent.ACTION_VIEW);
                 i.setData(Uri.parse(mWebUrl));

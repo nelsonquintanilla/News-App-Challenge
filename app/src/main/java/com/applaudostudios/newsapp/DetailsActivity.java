@@ -13,7 +13,6 @@ import com.applaudostudios.newsapp.model.News;
 
 public class DetailsActivity extends AppCompatActivity {
     private static final String EXTRA_DETAIL = "EXTRA_DETAIL";
-    private News mNews;
 
     public static Intent putNews(Context context, News news) {
         Intent intent = new Intent(context, DetailsActivity.class);
@@ -26,7 +25,7 @@ public class DetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
 
-        mNews = getIntent().getParcelableExtra(EXTRA_DETAIL);
+        News mNews = getIntent().getParcelableExtra(EXTRA_DETAIL);
 
         DetailsFragment fragment = DetailsFragment.newInstance(mNews, mNews.getThumbnail());
 

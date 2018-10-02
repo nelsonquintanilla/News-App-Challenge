@@ -63,7 +63,7 @@ public class News implements Parcelable {
         dest.writeString(this.mWebUrl);
     }
 
-    protected News(Parcel in) {
+    private News(Parcel in) {
         this.mHeadline = in.readString();
         this.mBodyText = in.readString();
         this.mThumbnail = in.readString();

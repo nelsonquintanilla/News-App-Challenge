@@ -9,10 +9,12 @@ import java.util.List;
 
 public class NewsLoader extends AsyncTaskLoader<List<News>> {
 
-    /** Query URL */
+    /**
+     * Query URL
+     */
     private String mUrl;
 
-    public NewsLoader(Context context, String url) {
+    NewsLoader(Context context, String url) {
         super(context);
         mUrl = url;
     }

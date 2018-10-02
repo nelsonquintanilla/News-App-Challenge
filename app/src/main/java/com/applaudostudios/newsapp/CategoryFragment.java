@@ -18,25 +18,24 @@ import android.widget.TextView;
 
 import com.applaudostudios.newsapp.adapters.RecyclerViewAdapter;
 import com.applaudostudios.newsapp.model.News;
+
 import java.util.List;
+import java.util.Objects;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class CategoryFragment extends Fragment implements CallBack, LoaderManager.LoaderCallbacks<List<News>> {
 
-    private TextView mEmptyStateTextView;
     private List<News> mData;
     public static final int NEWS_LOADER_ID = 1;
-    private int page;
-    private View mView;
     private RecyclerViewAdapter recyclerViewAdapter;
 
     public CategoryFragment() {
         // Required empty public constructor
     }
 
-    public static CategoryFragment newInstance(int page, String url){
+    public static CategoryFragment newInstance(String url) {
         CategoryFragment categoryFragment = new CategoryFragment();
         Bundle args = new Bundle();
         args.putString("someUrl", url);
@@ -47,18 +46,20 @@ public class CategoryFragment extends Fragment implements CallBack, LoaderManage
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        mView = inflater.inflate(R.layout.fragment_category, container, false);
+        View mView = inflater.inflate(R.layout.fragment_category, container, false);
 
         // Inflate the layout for this fragment
-        mEmptyStateTextView = mView.findViewById(R.id.empty_view);
+        TextView mEmptyStateTextView = mView.findViewById(R.id.empty_view);
 
         // Check the status of the network connection.
-        ConnectivityManager connMgr = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        ConnectivityManager connMgr = (ConnectivityManager)
+                Objects.requireNonNull(getActivity()).getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = null;
         if (connMgr != null) {
             networkInfo = connMgr.getActiveNetworkInfo();
@@ -81,7 +82,7 @@ public class CategoryFragment extends Fragment implements CallBack, LoaderManage
             loadingIndicator.setVisibility(View.GONE);
 
             // Update empty state with no connection error message
-            mEmptyStateTextView.setText("No internet connection");
+            mEmptyStateTextView.setText(R.string.no_internet_connection);
         }
 
         RecyclerView myRecyclerView = mView.findViewById(R.id.recycler_view_news);
@@ -92,15 +93,16 @@ public class CategoryFragment extends Fragment implements CallBack, LoaderManage
         return mView;
     }
 
+
     @NonNull
     @Override
     public Loader<List<News>> onCreateLoader(int id, @Nullable Bundle args) {
-        return new NewsLoader(getActivity(), getArguments().getString("someUrl"));
+        return new NewsLoader(getActivity(), Objects.requireNonNull(getArguments()).getString("someUrl"));
     }
 
     @Override
     public void onLoadFinished(@NonNull Loader<List<News>> loader, List<News> data) {
-        View loadingIndicator = getView().findViewById(R.id.loading_indicator);
+        View loadingIndicator = Objects.requireNonNull(getView()).findViewById(R.id.loading_indicator);
         loadingIndicator.setVisibility(View.GONE);
         recyclerViewAdapter.setData(data);
         mData = data;

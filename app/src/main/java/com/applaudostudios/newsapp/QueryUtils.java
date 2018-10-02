@@ -134,16 +134,16 @@ public class QueryUtils {
                 JSONObject currentNews = results.getJSONObject(i);
                 JSONObject fields = currentNews.getJSONObject("fields");
 
-                if(currentNews.has("webUrl"))
+                if (currentNews.has("webUrl"))
                     news.setWebUrl(currentNews.getString("webUrl"));
 
-                if(fields.has("headline"))
+                if (fields.has("headline"))
                     news.setHeadline(fields.getString("headline"));
 
-                if(fields.has("bodyText"))
+                if (fields.has("bodyText"))
                     news.setBodyText(fields.getString("bodyText"));
 
-                if(fields.has("thumbnail"))
+                if (fields.has("thumbnail"))
                     news.setThumbnail(fields.getString("thumbnail"));
 
                 newsList.add(news);

@@ -5,6 +5,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
 import com.applaudostudios.newsapp.adapters.FragmentPagerAdapter;
 
 public class MainActivity extends AppCompatActivity {
