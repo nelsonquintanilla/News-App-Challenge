@@ -9,4 +9,5 @@
     <string name="bodytext">BodyText</string>
     <string name="web_url_button">web_url_button</string>
     <string name="news_headline">Headline</string>
+    <string name="search">Search</string>
 </resources>

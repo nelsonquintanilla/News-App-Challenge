@@ -1,6 +1,7 @@
 package com.applaudostudios.newsapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -11,16 +12,19 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import com.applaudostudios.newsapp.adapters.RecyclerViewAdapter;
 import com.applaudostudios.newsapp.model.News;
 
 import java.util.List;
-import java.util.Objects;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -65,7 +69,7 @@ public class CategoryFragment extends Fragment implements CallBack, LoaderManage
 
         // Checks the status of the network connection
         ConnectivityManager connMgr = (ConnectivityManager)
-                Objects.requireNonNull(getActivity()).getSystemService(Context.CONNECTIVITY_SERVICE);
+                (getActivity()).getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = null;
         if (connMgr != null) {
             networkInfo = connMgr.getActiveNetworkInfo();
@@ -100,17 +104,18 @@ public class CategoryFragment extends Fragment implements CallBack, LoaderManage
     }
 
 
+
     // Methods required because of the implementation of the LoaderCallbacks interface
     @NonNull
     @Override
     public Loader<List<News>> onCreateLoader(int id, @Nullable Bundle args) {
-        return new NewsLoader(getActivity(), Objects.requireNonNull(getArguments()).getString("someUrl"));
+        return new NewsLoader(getActivity(), (getArguments()).getString("someUrl"));
     }
 
     @Override
     public void onLoadFinished(@NonNull Loader<List<News>> loader, List<News> data) {
         // Removing loading indicator
-        View loadingIndicator = Objects.requireNonNull(getView()).findViewById(R.id.loading_indicator);
+        View loadingIndicator = (getView()).findViewById(R.id.loading_indicator);
         loadingIndicator.setVisibility(View.GONE);
         // Updates the data in the adapter
         recyclerViewAdapter.setData(data);
