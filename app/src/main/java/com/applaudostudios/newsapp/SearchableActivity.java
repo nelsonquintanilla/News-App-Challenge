@@ -37,7 +37,7 @@ public class SearchableActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu);
-        SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
+        final SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -48,6 +48,7 @@ public class SearchableActivity extends AppCompatActivity {
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.fragment_container, searchFragment);
                 fragmentTransaction.commit();
+                searchView.onActionViewCollapsed();
                 return false;
             }
 
