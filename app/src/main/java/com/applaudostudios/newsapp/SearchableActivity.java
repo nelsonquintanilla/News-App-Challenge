@@ -9,6 +9,9 @@ import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuItem;
 
+/**
+ * Activity to create an instance of CategoryFragment and shows the search results.
+ */
 public class SearchableActivity extends AppCompatActivity {
     private CategoryFragment searchFragment;
     @Override
@@ -41,6 +44,7 @@ public class SearchableActivity extends AppCompatActivity {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
+                // Creating fragment.
                 searchFragment = CategoryFragment.newInstance(
                         "https://content.guardianapis.com/search?show-fields=headline%2Cthumbnail%2CbodyText&page=1&page-size=30&q="
                         + query + "&api-key=f8bc1c2f-a416-4927-b866-b05b70de8f11");
@@ -48,6 +52,7 @@ public class SearchableActivity extends AppCompatActivity {
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.fragment_container, searchFragment);
                 fragmentTransaction.commit();
+                // Collapse the searchView widget when tap search.
                 searchView.onActionViewCollapsed();
                 return false;
             }
@@ -58,6 +63,7 @@ public class SearchableActivity extends AppCompatActivity {
             }
         });
         searchView.setIconified(false);
+        // Open the searchView to make a search when the activity is created.
         searchView.requestFocusFromTouch();
         return true;
     }

@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    // When the searchView is tapped, it creates the Searchable activity to make the search there.
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -47,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    // Inflates the searchView in the MainActivity.
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu2, menu);
