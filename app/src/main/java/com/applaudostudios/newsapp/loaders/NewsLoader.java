@@ -1,8 +1,9 @@
-package com.applaudostudios.newsapp;
+package com.applaudostudios.newsapp.loaders;
 
 import android.content.Context;
 import android.support.v4.content.AsyncTaskLoader;
 
+import com.applaudostudios.newsapp.utils.QueryUtils;
 import com.applaudostudios.newsapp.model.News;
 
 import java.util.List;
@@ -14,7 +15,7 @@ public class NewsLoader extends AsyncTaskLoader<List<News>> {
      */
     private String mUrl;
 
-    NewsLoader(Context context, String url) {
+    public NewsLoader(Context context, String url) {
         super(context);
         mUrl = url;
     }

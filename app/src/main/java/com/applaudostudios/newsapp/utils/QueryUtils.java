@@ -1,4 +1,4 @@
-package com.applaudostudios.newsapp;
+package com.applaudostudios.newsapp.utils;
 
 import android.text.TextUtils;
 import android.util.Log;

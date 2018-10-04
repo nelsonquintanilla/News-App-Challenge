@@ -1,4 +1,4 @@
-package com.applaudostudios.newsapp;
+package com.applaudostudios.newsapp.fragments;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -15,6 +15,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.applaudostudios.newsapp.R;
+import com.applaudostudios.newsapp.loaders.ThumbnailLoader;
 import com.applaudostudios.newsapp.model.News;
 
 import java.util.Objects;

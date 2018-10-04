@@ -5,7 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.applaudostudios.newsapp.CategoryFragment;
+import com.applaudostudios.newsapp.fragments.CategoryFragment;
 
 public class FragmentPagerAdapter extends FragmentStatePagerAdapter {
 

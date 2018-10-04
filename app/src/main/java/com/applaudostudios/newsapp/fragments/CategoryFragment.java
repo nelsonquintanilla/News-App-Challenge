@@ -1,4 +1,4 @@
-package com.applaudostudios.newsapp;
+package com.applaudostudios.newsapp.fragments;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
@@ -15,6 +15,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.applaudostudios.newsapp.activities.DetailsActivity;
+import com.applaudostudios.newsapp.loaders.NewsLoader;
+import com.applaudostudios.newsapp.R;
 import com.applaudostudios.newsapp.adapters.RecyclerViewAdapter;
 import com.applaudostudios.newsapp.model.News;
 

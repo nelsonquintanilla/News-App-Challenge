@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".MainActivity" >
+        <activity android:name=".activities.MainActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,11 +22,11 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".DetailsActivity" >
+        <activity android:name=".activities.DetailsActivity" >
 
         </activity>
 
-        <activity android:name=".SearchableActivity" >
+        <activity android:name=".activities.SearchableActivity" >
 
         </activity>
 

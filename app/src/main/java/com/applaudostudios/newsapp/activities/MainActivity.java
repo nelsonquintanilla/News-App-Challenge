@@ -1,4 +1,4 @@
-package com.applaudostudios.newsapp;
+package com.applaudostudios.newsapp.activities;
 
 import android.content.Intent;
 import android.support.design.widget.TabLayout;
@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.applaudostudios.newsapp.R;
 import com.applaudostudios.newsapp.adapters.FragmentPagerAdapter;
 
 public class MainActivity extends AppCompatActivity {

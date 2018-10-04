@@ -1,4 +1,4 @@
-package com.applaudostudios.newsapp;
+package com.applaudostudios.newsapp.activities;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,6 +9,8 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
+import com.applaudostudios.newsapp.R;
+import com.applaudostudios.newsapp.fragments.DetailsFragment;
 import com.applaudostudios.newsapp.model.News;
 
 public class DetailsActivity extends AppCompatActivity {

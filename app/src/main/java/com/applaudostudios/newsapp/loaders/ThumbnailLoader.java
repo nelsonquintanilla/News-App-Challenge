@@ -1,4 +1,4 @@
-package com.applaudostudios.newsapp;
+package com.applaudostudios.newsapp.loaders;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -15,7 +15,7 @@ public class ThumbnailLoader extends AsyncTaskLoader<Bitmap> {
 
     private String mUrl;
 
-    ThumbnailLoader(@NonNull Context context, String url) {
+    public ThumbnailLoader(@NonNull Context context, String url) {
         super(context);
         mUrl = url;
     }
