@@ -23,7 +23,7 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class CategoryFragment extends Fragment implements CallBack, LoaderManager.LoaderCallbacks<List<News>> {
+public class CategoryFragment extends Fragment implements RecyclerViewAdapter.CallBack, LoaderManager.LoaderCallbacks<List<News>> {
 
     private List<News> mData;
     public static final int NEWS_LOADER_ID = 1;

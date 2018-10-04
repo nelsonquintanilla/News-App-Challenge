@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.applaudostudios.newsapp.CallBack;
 import com.applaudostudios.newsapp.R;
 import com.applaudostudios.newsapp.model.News;
 
@@ -71,6 +70,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         public void onClick(View view) {
             mCallBack.onItemClick(getAdapterPosition());
         }
+    }
+
+    public interface CallBack {
+        void onItemClick(int position);
     }
 
 
