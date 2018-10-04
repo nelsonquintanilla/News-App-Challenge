@@ -29,12 +29,12 @@ public class NewsDbHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         // Creates a String that contains the SQL statement to create the news table.
         String SQL_CREATES_NEWS_TABLE = "CREATE TABLE " + NewsEntry.TABLE_NAME + " ("
-                + NewsEntry._ID + "INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + NewsEntry.COLUMN_NEWS_CATEGORY + "TEXT, "
-                + NewsEntry.COLUMN_NEWS_HEADLINE + "TEXT, "
-                + NewsEntry.COLUMN_NEWS_BODY_TEXT + "TEXT DEFAULT 'empty', "
-                + NewsEntry.COLUMN_NEWS_THUMBNAIL + "TEXT, "
-                + NewsEntry.COLUMN_NEWS_WEB_URL + "TEXT);";
+                + NewsEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + NewsEntry.COLUMN_NEWS_CATEGORY + " TEXT, "
+                + NewsEntry.COLUMN_NEWS_HEADLINE + " TEXT, "
+                + NewsEntry.COLUMN_NEWS_BODY_TEXT + " TEXT DEFAULT 'empty', "
+                + NewsEntry.COLUMN_NEWS_THUMBNAIL + " TEXT, "
+                + NewsEntry.COLUMN_NEWS_WEB_URL + " TEXT);";
 
         // Execute the SQL statement
         db.execSQL(SQL_CREATES_NEWS_TABLE);
