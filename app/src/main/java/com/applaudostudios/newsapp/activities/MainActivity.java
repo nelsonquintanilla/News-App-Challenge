@@ -1,5 +1,6 @@
 package com.applaudostudios.newsapp.activities;
 
+
 import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -12,7 +13,11 @@ import android.view.MenuItem;
 import com.applaudostudios.newsapp.R;
 import com.applaudostudios.newsapp.adapters.FragmentPagerAdapter;
 
+
+
 public class MainActivity extends AppCompatActivity {
+
+//    private NewsDbHelper mDbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +40,14 @@ public class MainActivity extends AppCompatActivity {
         if (actionBar != null) {
             actionBar.setElevation(0);
         }
+
+//        mDbHelper = new NewsDbHelper(this);
+//        SQLiteDatabase db = mDbHelper.getWritableDatabase();
+//        ContentValues values = new ContentValues();
+//        values.put(NewsEntry.COLUMN_NEWS_HEADLINE, );
+//        values.put(NewsEntry.COLUMN_NEWS_BODY_TEXT, );
+//        values.put(NewsEntry.COLUMN_NEWS_THUMBNAIL, );
+//        values.put(NewsEntry.COLUMN_NEWS_WEB_URL, );
     }
 
     // When the searchView is tapped, it creates the Searchable activity to make the search there.

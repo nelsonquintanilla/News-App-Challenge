@@ -22,14 +22,14 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".activities.DetailsActivity" >
+        <activity android:name=".activities.DetailsActivity" />
 
-        </activity>
+        <activity android:name=".activities.SearchableActivity" />
 
-        <activity android:name=".activities.SearchableActivity" >
-
-        </activity>
-
+        <provider
+            android:authorities="com.applaudostudios.newsapp"
+            android:name=".data.NewsProvider"
+            android:exported="false" />
 
     </application>
 

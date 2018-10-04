@@ -159,6 +159,7 @@ public class QueryUtils {
                     news.setThumbnail(fields.getString("thumbnail"));
 
                 newsList.add(news);
+
             }
 
         } catch (JSONException e) {

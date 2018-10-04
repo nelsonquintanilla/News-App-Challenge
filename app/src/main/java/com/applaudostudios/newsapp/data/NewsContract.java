@@ -1,5 +1,6 @@
 package com.applaudostudios.newsapp.data;
 
+import android.net.Uri;
 import android.provider.BaseColumns;
 
 /**
@@ -12,10 +13,29 @@ public final class NewsContract {
     private NewsContract() {}
 
     /**
+     * Name for the entire content provider. A convenient string to use for the content authority
+     * is the package name for the app, which is guaranteed to be unique on the device.
+     */
+    public static final String CONTENT_AUTHORITY = "com.applaudostudios.newsapp";
+
+    /**
+     * shared by every URI associated with NewsContract.
+     */
+    public static final Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
+
+    /**
+     * Stores the path for this tables which will be appended to the base content URI.
+     */
+    public static final String PATH_NEWS = "news";
+
+    /**
      * Inner class that defines constant values for the news database table.
      * Each entry in the table represents a single news.
      */
     public static final class NewsEntry implements BaseColumns{
+
+        /** The content URI to access the pet data in the provider */
+        public static final Uri CONSTANT_URI = Uri.withAppendedPath(BASE_CONTENT_URI, PATH_NEWS);
 
         /** Name of database table for news */
         public static final String TABLE_NAME = "news";
@@ -26,6 +46,16 @@ public final class NewsContract {
          * Type: INTEGER
          */
         public static final String _ID = BaseColumns._ID;
+
+        /**
+         * Category of the news.
+         *
+         * The only possible values are CATEGORY_SPORTS, CATEGORY_POLITICS, CATEGORY_BUSINESS,
+         * CATEGORY_TECH and CATEGORY_WORLD.
+         *
+         * Type: TEXT
+         */
+        public static final String COLUMN_NEWS_CATEGORY = "category";
 
         /**
          * Headline of the news.
@@ -39,7 +69,7 @@ public final class NewsContract {
          *
          * Type: TEXT
          */
-        public static final String COLUMN_NEWS_BODYTEXT = "body_text";
+        public static final String COLUMN_NEWS_BODY_TEXT = "body_text";
 
         /**
          * Thumbnail of the news.
@@ -54,6 +84,15 @@ public final class NewsContract {
          * Type: TEXT
          */
         public static final String COLUMN_NEWS_WEB_URL = "web_url";
+
+        /**
+         * Possible values for the category of the news.
+         */
+        public static final int CATEGORY_SPORTS = 0;
+        public static final int CATEGORY_POLITICS = 1;
+        public static final int CATEGORY_BUSINESS = 3;
+        public static final int CATEGORY_TECH = 4;
+        public static final int CATEGORY_WORLD = 5;
 
     }
 
