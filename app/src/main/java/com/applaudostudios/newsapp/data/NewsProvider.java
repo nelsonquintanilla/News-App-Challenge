@@ -138,8 +138,23 @@ public class NewsProvider extends ContentProvider {
     }
 
     @Override
-    public int delete(@NonNull Uri uri, @Nullable String s, @Nullable String[] strings) {
-        return 0;
+    public int delete(@NonNull Uri uri, @Nullable String selection, @Nullable String[] selectionArgs) {
+
+        SQLiteDatabase db = mDbHelper.getWritableDatabase();
+
+        int match = sUriMatcher.match(uri);
+        switch (match){
+            case NEWS:
+                return db.delete(NewsEntry.TABLE_NAME, selection, selectionArgs);
+
+            case NEWS_ID:
+                selection = NewsEntry._ID + "=?";
+                selectionArgs = new String[] {String.valueOf(ContentUris.parseId(uri))};
+                return db.delete(NewsEntry.TABLE_NAME, selection, selectionArgs);
+
+            default:
+                throw new IllegalArgumentException("Deletion is not supported for " + uri);
+        }
     }
 
     @Nullable
