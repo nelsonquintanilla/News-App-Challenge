@@ -35,7 +35,7 @@ public final class NewsContract {
     public static final class NewsEntry implements BaseColumns{
 
         /** The content URI to access the pet data in the provider */
-        public static final Uri CONSTANT_URI = Uri.withAppendedPath(BASE_CONTENT_URI, PATH_NEWS);
+        public static final Uri CONTENT_URI = Uri.withAppendedPath(BASE_CONTENT_URI, PATH_NEWS);
 
         /** Name of database table for news */
         public static final String TABLE_NAME = "news";

@@ -50,14 +50,20 @@ public class MainActivity extends AppCompatActivity {
 //
 //        SQLiteDatabase db = mDbHelper.getWritableDatabase();
 //
+//        db.insert(NewsEntry.TABLE_NAME, null, values);
+
+        //insert
 //        ContentValues values = new ContentValues();
-//        //category missing...
+//        values.put(NewsEntry.COLUMN_NEWS_CATEGORY, "Sports");
 //        values.put(NewsEntry.COLUMN_NEWS_HEADLINE, "Title1");
 //        values.put(NewsEntry.COLUMN_NEWS_BODY_TEXT, "BodyText1");
 //        values.put(NewsEntry.COLUMN_NEWS_THUMBNAIL, "Thumbnail1");
 //        values.put(NewsEntry.COLUMN_NEWS_WEB_URL, "WebUrl1");
 //
-//        db.insert(NewsEntry.TABLE_NAME, null, values);
+//        getContentResolver().insert(NewsEntry.CONTENT_URI, values);
+
+
+
     }
 
     // When the searchView is tapped, it creates the Searchable activity to make the search there.

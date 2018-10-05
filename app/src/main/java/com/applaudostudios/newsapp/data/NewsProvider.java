@@ -92,7 +92,7 @@ public class NewsProvider extends ContentProvider {
     @Override
     public Uri insert(@NonNull Uri uri, @Nullable ContentValues contentValues) {
 
-        SQLiteDatabase db = mDbHelper.getReadableDatabase();
+        SQLiteDatabase db = mDbHelper.getWritableDatabase();
 
         int match = sUriMatcher.match(uri);
         switch (match) {
@@ -103,6 +103,7 @@ public class NewsProvider extends ContentProvider {
                     Log.e(LOG_TAG, "Failed to insert row for " + uri);
                     return null;
                 }
+                // Return the new URI with the ID (of the newly inserted row) appended at the end.
                 return ContentUris.withAppendedId(uri, id);
 
             default:
