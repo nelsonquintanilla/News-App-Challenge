@@ -4,6 +4,7 @@ package com.applaudostudios.newsapp.activities;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
@@ -61,7 +62,33 @@ public class MainActivity extends AppCompatActivity {
 //        values.put(NewsEntry.COLUMN_NEWS_WEB_URL, "WebUrl1");
 //
 //        getContentResolver().insert(NewsEntry.CONTENT_URI, values);
-
+//
+//        ContentValues values1 = new ContentValues();
+//        values1.put(NewsEntry.COLUMN_NEWS_CATEGORY, "Sports");
+//        values1.put(NewsEntry.COLUMN_NEWS_HEADLINE, "Title1");
+//        values1.put(NewsEntry.COLUMN_NEWS_BODY_TEXT, "BodyText1");
+//        values1.put(NewsEntry.COLUMN_NEWS_THUMBNAIL, "Thumbnail1");
+//        values1.put(NewsEntry.COLUMN_NEWS_WEB_URL, "WebUrl1");
+//
+//        getContentResolver().insert(NewsEntry.CONTENT_URI, values1);
+//
+//        ContentValues values2 = new ContentValues();
+//        values2.put(NewsEntry.COLUMN_NEWS_CATEGORY, "Sports");
+//        values2.put(NewsEntry.COLUMN_NEWS_HEADLINE, "Title1");
+//        values2.put(NewsEntry.COLUMN_NEWS_BODY_TEXT, "BodyText1");
+//        values2.put(NewsEntry.COLUMN_NEWS_THUMBNAIL, "Thumbnail1");
+//        values2.put(NewsEntry.COLUMN_NEWS_WEB_URL, "WebUrl1");
+//
+//        getContentResolver().insert(NewsEntry.CONTENT_URI, values2);
+//
+//        ContentValues values3 = new ContentValues();
+//        values3.put(NewsEntry.COLUMN_NEWS_CATEGORY, "NOTHING");
+//        values3.put(NewsEntry.COLUMN_NEWS_HEADLINE, "Title5");
+//        values3.put(NewsEntry.COLUMN_NEWS_BODY_TEXT, "BodyText5");
+//        values3.put(NewsEntry.COLUMN_NEWS_THUMBNAIL, "Thumbnail5");
+//        values3.put(NewsEntry.COLUMN_NEWS_WEB_URL, "WebUrl5");
+//
+//        getContentResolver().update(Uri.withAppendedPath(NewsEntry.CONTENT_URI,"5"), values3,  null, null );
 
 
     }

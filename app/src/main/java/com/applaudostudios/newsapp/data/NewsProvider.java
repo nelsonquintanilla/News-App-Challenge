@@ -15,7 +15,9 @@ import com.applaudostudios.newsapp.data.NewsContract.NewsEntry;
 
 public class NewsProvider extends ContentProvider {
 
-    /** Tag for the log messages */
+    /**
+     * Tag for the log messages
+     */
     public static final String LOG_TAG = NewsProvider.class.getSimpleName();
 
     /**
@@ -112,8 +114,27 @@ public class NewsProvider extends ContentProvider {
     }
 
     @Override
-    public int update(@NonNull Uri uri, @Nullable ContentValues contentValues, @Nullable String s, @Nullable String[] strings) {
-        return 0;
+    public int update(
+            @NonNull Uri uri,
+            @Nullable ContentValues contentValues,
+            @Nullable String selection,
+            @Nullable String[] selectionArgs) {
+
+        SQLiteDatabase db = mDbHelper.getWritableDatabase();
+
+        int match = sUriMatcher.match(uri);
+        switch (match){
+            case NEWS:
+                return db.update(NewsEntry.TABLE_NAME, contentValues, selection, selectionArgs);
+
+            case NEWS_ID:
+                selection = NewsEntry._ID + "=?";
+                selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
+                return db.update(NewsEntry.TABLE_NAME, contentValues, selection, selectionArgs);
+
+            default:
+                throw new IllegalArgumentException("Update is not supported for " + uri);
+        }
     }
 
     @Override
