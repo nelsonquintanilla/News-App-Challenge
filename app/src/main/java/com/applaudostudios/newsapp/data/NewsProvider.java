@@ -123,7 +123,7 @@ public class NewsProvider extends ContentProvider {
         SQLiteDatabase db = mDbHelper.getWritableDatabase();
 
         int match = sUriMatcher.match(uri);
-        switch (match){
+        switch (match) {
             case NEWS:
                 return db.update(NewsEntry.TABLE_NAME, contentValues, selection, selectionArgs);
 
@@ -143,13 +143,13 @@ public class NewsProvider extends ContentProvider {
         SQLiteDatabase db = mDbHelper.getWritableDatabase();
 
         int match = sUriMatcher.match(uri);
-        switch (match){
+        switch (match) {
             case NEWS:
                 return db.delete(NewsEntry.TABLE_NAME, selection, selectionArgs);
 
             case NEWS_ID:
                 selection = NewsEntry._ID + "=?";
-                selectionArgs = new String[] {String.valueOf(ContentUris.parseId(uri))};
+                selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
                 return db.delete(NewsEntry.TABLE_NAME, selection, selectionArgs);
 
             default:
@@ -157,10 +157,21 @@ public class NewsProvider extends ContentProvider {
         }
     }
 
+    /**
+     * Returns a string that describes the type of the data stored at the input iri (MIME type).
+     */
     @Nullable
     @Override
     public String getType(@NonNull Uri uri) {
-        return null;
+        final int match = sUriMatcher.match(uri);
+        switch (match) {
+            case NEWS:
+                return NewsEntry.CONTENT_LIST_TYPE;
+            case NEWS_ID:
+                return NewsEntry.CONTENT_ITEM_TYPE;
+            default:
+                throw new IllegalStateException("Unknown URI " + uri + " with match " + match);
+        }
     }
 
 
