@@ -1,5 +1,6 @@
 package com.applaudostudios.newsapp.utils;
 
+import android.content.ContentValues;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -19,6 +20,7 @@ import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class QueryUtils {
 
@@ -159,7 +161,6 @@ public class QueryUtils {
                     news.setThumbnail(fields.getString("thumbnail"));
 
                 newsList.add(news);
-
             }
 
         } catch (JSONException e) {
