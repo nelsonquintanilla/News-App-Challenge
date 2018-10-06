@@ -66,45 +66,45 @@ public final class NewsContract {
 
         /**
          * Unique ID number for the pet (only for use in the database table).
-         * <p>
+         *
          * Type: INTEGER
          */
         public static final String _ID = BaseColumns._ID;
 
         /**
          * Category of the news.
-         * <p>
+         *
          * The only possible values are CATEGORY_SPORTS, CATEGORY_POLITICS, CATEGORY_BUSINESS,
          * CATEGORY_TECH and CATEGORY_WORLD.
-         * <p>
+         *
          * Type: TEXT
          */
-        public static final String COLUMN_NEWS_CATEGORY = "category";
+//        public static final String COLUMN_NEWS_CATEGORY = "category";
 
         /**
          * Headline of the news.
-         * <p>
+         *
          * Type: TEXT
          */
         public static final String COLUMN_NEWS_HEADLINE = "headline";
 
         /**
          * Body text of the news.
-         * <p>
+         *
          * Type: TEXT
          */
         public static final String COLUMN_NEWS_BODY_TEXT = "body_text";
 
         /**
          * Thumbnail of the news.
-         * <p>
+         *
          * Type: TEXT
          */
         public static final String COLUMN_NEWS_THUMBNAIL = "thumbnail";
 
         /**
          * Web url of the news.
-         * <p>
+         *
          * Type: TEXT
          */
         public static final String COLUMN_NEWS_WEB_URL = "web_url";

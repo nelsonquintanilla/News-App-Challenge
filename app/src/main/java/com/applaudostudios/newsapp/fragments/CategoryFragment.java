@@ -2,6 +2,7 @@ package com.applaudostudios.newsapp.fragments;
 
 import android.content.Context;
 
+import android.database.Cursor;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -19,12 +20,14 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.applaudostudios.newsapp.activities.DetailsActivity;
+import com.applaudostudios.newsapp.data.NewsContract;
 import com.applaudostudios.newsapp.data.NewsContract.NewsEntry;
 import com.applaudostudios.newsapp.loaders.NewsLoader;
 import com.applaudostudios.newsapp.R;
 import com.applaudostudios.newsapp.adapters.RecyclerViewAdapter;
 import com.applaudostudios.newsapp.model.News;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -36,6 +39,7 @@ public class CategoryFragment extends Fragment implements RecyclerViewAdapter.Ca
     public static final int NEWS_LOADER_ID = 0;
     public static final int CURSOR_LOADER_ID = 1;
     private RecyclerViewAdapter recyclerViewAdapter;
+    private Cursor mCursor;
 
     public CategoryFragment() {
         // Required empty public constructor
@@ -119,23 +123,30 @@ public class CategoryFragment extends Fragment implements RecyclerViewAdapter.Ca
                 return new NewsLoader(getActivity(), (getArguments()).getString("someUrl"));
 
             case 1:
-//                // Define a projection that specifies the columns from the table we care about.
-//                String[] projection = {
-//                        NewsEntry._ID,
+                // Define a projection that specifies the columns from the table we care about.
+                String[] projection = {
+                        NewsEntry._ID,
 //                        NewsEntry.COLUMN_NEWS_CATEGORY,
-//                        NewsEntry.COLUMN_NEWS_HEADLINE,
-//                        NewsEntry.COLUMN_NEWS_BODY_TEXT,
-//                        NewsEntry.COLUMN_NEWS_THUMBNAIL,
-//                        NewsEntry.COLUMN_NEWS_WEB_URL};
-//
-//                // This loader will execute the ContentProvider's query method on a background thread
-//                return new CursorLoader( getContext(),   // Parent activity context
-//                        NewsEntry.CONTENT_URI,   // Provider content URI to query
-//                        projection,             // Columns to include in the resulting Cursor
-//                        null,                   // No selection clause
-//                        null,                   // No selection arguments
-//                        null);                  // Default sort order
+                        NewsEntry.COLUMN_NEWS_HEADLINE,
+                        NewsEntry.COLUMN_NEWS_BODY_TEXT,
+                        NewsEntry.COLUMN_NEWS_THUMBNAIL,
+                        NewsEntry.COLUMN_NEWS_WEB_URL};
 
+                // This loader will execute the ContentProvider's query method on a background thread
+                // Parent activity context
+                if(getContext()!=null){
+                    return new CursorLoader( getContext(),
+                            // Provider content URI to query
+                            NewsEntry.CONTENT_URI,
+                            // Columns to include in the resulting Cursor
+                            projection,
+                            // No selection clause
+                            null,
+                            // No selection arguments
+                            null,
+                            // Default sort order
+                            null);
+                }
             default:
                 break;
         }
@@ -144,11 +155,11 @@ public class CategoryFragment extends Fragment implements RecyclerViewAdapter.Ca
 
     @Override
     public void onLoadFinished(@NonNull Loader loader, Object data) {
-
+        View loadingIndicator;
         switch (loader.getId()) {
             case 0:
                 // Removing loading indicator
-                View loadingIndicator = (getView()).findViewById(R.id.loading_indicator);
+                loadingIndicator = (getView()).findViewById(R.id.loading_indicator);
                 loadingIndicator.setVisibility(View.GONE);
                 // Updates the data in the adapter
                 recyclerViewAdapter.setData((List<News>) data);
@@ -157,7 +168,14 @@ public class CategoryFragment extends Fragment implements RecyclerViewAdapter.Ca
                 break;
 
             case 1:
-
+                // Removing loading indicator
+                loadingIndicator = (getView()).findViewById(R.id.loading_indicator);
+                loadingIndicator.setVisibility(View.GONE);
+                List<News> dataExtracted = getCursorData(data);
+                // Updates the data in the adapter
+                recyclerViewAdapter.setData(dataExtracted);
+                // Saving data to use it later on on the onItemClickMethod
+                mData = dataExtracted;
                 break;
 
             default:
@@ -165,13 +183,34 @@ public class CategoryFragment extends Fragment implements RecyclerViewAdapter.Ca
         }
     }
 
-//    public void getString
+    public List<News> getCursorData(Object data){
+        mCursor = (Cursor) data;
+        List<News> newsList = new ArrayList<>();
+        newsList.clear();
+
+        // If table has rows.
+        if(mCursor.moveToFirst()){
+            // Loop through the table rows.
+            do{
+                News news = new News("", "", "", "");
+                news.setHeadline( mCursor.getString(mCursor.getColumnIndex(NewsEntry.COLUMN_NEWS_HEADLINE)) );
+                news.setBodyText( mCursor.getString(mCursor.getColumnIndex(NewsEntry.COLUMN_NEWS_BODY_TEXT)) );
+                news.setThumbnail( mCursor.getString(mCursor.getColumnIndex(NewsEntry.COLUMN_NEWS_THUMBNAIL)) );
+                news.setWebUrl( mCursor.getString(mCursor.getColumnIndex(NewsEntry.COLUMN_NEWS_WEB_URL)) );
+                newsList.add(news);
+            } while (mCursor.moveToNext());
+        }
+        return newsList;
+    }
 
     @Override
     public void onLoaderReset(@NonNull Loader loader) {
         switch (loader.getId()){
             case 1:
-
+                mCursor.close();
+                break;
+            default:
+                break;
         }
     }
 
