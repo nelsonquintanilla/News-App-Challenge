@@ -1,6 +1,7 @@
 package com.applaudostudios.newsapp.fragments;
 
 import android.content.Context;
+
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
+import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,6 +19,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.applaudostudios.newsapp.activities.DetailsActivity;
+import com.applaudostudios.newsapp.data.NewsContract.NewsEntry;
 import com.applaudostudios.newsapp.loaders.NewsLoader;
 import com.applaudostudios.newsapp.R;
 import com.applaudostudios.newsapp.adapters.RecyclerViewAdapter;
@@ -27,10 +30,11 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class CategoryFragment extends Fragment implements RecyclerViewAdapter.CallBack, LoaderManager.LoaderCallbacks<List<News>> {
+public class CategoryFragment extends Fragment implements RecyclerViewAdapter.CallBack, LoaderManager.LoaderCallbacks {
 
     private List<News> mData;
-    public static final int NEWS_LOADER_ID = 1;
+    public static final int NEWS_LOADER_ID = 0;
+    public static final int CURSOR_LOADER_ID = 1;
     private RecyclerViewAdapter recyclerViewAdapter;
 
     public CategoryFragment() {
@@ -87,8 +91,12 @@ public class CategoryFragment extends Fragment implements RecyclerViewAdapter.Ca
             View loadingIndicator = mView.findViewById(R.id.loading_indicator);
             loadingIndicator.setVisibility(View.GONE);
 
-            // Updates empty state with no connection error message
-            mEmptyStateTextView.setText(R.string.no_internet_connection);
+            LoaderManager loaderManager2 = getLoaderManager();
+
+            loaderManager2.initLoader(CURSOR_LOADER_ID, null, this);
+
+//            // Updates empty state with no connection error message
+//            mEmptyStateTextView.setText(R.string.no_internet_connection);
         }
 
         // Declares and initializes the recyclerView object
@@ -102,29 +110,82 @@ public class CategoryFragment extends Fragment implements RecyclerViewAdapter.Ca
     }
 
 
-
     // Methods required because of the implementation of the LoaderCallbacks interface
     @NonNull
     @Override
-    public Loader<List<News>> onCreateLoader(int id, @Nullable Bundle args) {
-        return new NewsLoader(getActivity(), (getArguments()).getString("someUrl"));
+    public Loader onCreateLoader(int id, @Nullable Bundle args) {
+        switch (id) {
+            case 0:
+                return new NewsLoader(getActivity(), (getArguments()).getString("someUrl"));
+
+            case 1:
+//                // Define a projection that specifies the columns from the table we care about.
+//                String[] projection = {
+//                        NewsEntry._ID,
+//                        NewsEntry.COLUMN_NEWS_CATEGORY,
+//                        NewsEntry.COLUMN_NEWS_HEADLINE,
+//                        NewsEntry.COLUMN_NEWS_BODY_TEXT,
+//                        NewsEntry.COLUMN_NEWS_THUMBNAIL,
+//                        NewsEntry.COLUMN_NEWS_WEB_URL};
+//
+//                // This loader will execute the ContentProvider's query method on a background thread
+//                return new CursorLoader( getContext(),   // Parent activity context
+//                        NewsEntry.CONTENT_URI,   // Provider content URI to query
+//                        projection,             // Columns to include in the resulting Cursor
+//                        null,                   // No selection clause
+//                        null,                   // No selection arguments
+//                        null);                  // Default sort order
+
+            default:
+                break;
+        }
+        return null;
     }
 
     @Override
-    public void onLoadFinished(@NonNull Loader<List<News>> loader, List<News> data) {
-        // Removing loading indicator
-        View loadingIndicator = (getView()).findViewById(R.id.loading_indicator);
-        loadingIndicator.setVisibility(View.GONE);
-        // Updates the data in the adapter
-        recyclerViewAdapter.setData(data);
-        // Saving data to use it later on on the onItemClickMethod
-        mData = data;
+    public void onLoadFinished(@NonNull Loader loader, Object data) {
+
+        switch (loader.getId()) {
+            case 0:
+                // Removing loading indicator
+                View loadingIndicator = (getView()).findViewById(R.id.loading_indicator);
+                loadingIndicator.setVisibility(View.GONE);
+                // Updates the data in the adapter
+                recyclerViewAdapter.setData((List<News>) data);
+                // Saving data to use it later on on the onItemClickMethod
+                mData = (List<News>) data;
+                break;
+
+            case 1:
+
+                break;
+
+            default:
+                break;
+        }
     }
 
+//    public void getString
+
     @Override
-    public void onLoaderReset(@NonNull Loader<List<News>> loader) {
-        // Empty.
+    public void onLoaderReset(@NonNull Loader loader) {
+        switch (loader.getId()){
+            case 1:
+
+        }
     }
+
+//    @Override
+//    public void onLoadFinished(@NonNull Loader<List<News>> loader, List<News> data) {
+//        // Removing loading indicator
+//        View loadingIndicator = (getView()).findViewById(R.id.loading_indicator);
+//        loadingIndicator.setVisibility(View.GONE);
+//        // Updates the data in the adapter
+//        recyclerViewAdapter.setData(data);
+//        // Saving data to use it later on on the onItemClickMethod
+//        mData = data;
+//    }
+
 
     // Method required because of the CallBack interface implementation.
     @Override
