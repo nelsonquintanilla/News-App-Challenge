@@ -2,6 +2,7 @@ package com.applaudostudios.newsapp.loaders;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.net.Uri;
 import android.support.v4.content.AsyncTaskLoader;
 
 import com.applaudostudios.newsapp.utils.QueryUtils;
@@ -16,10 +17,12 @@ public class NewsLoader extends AsyncTaskLoader<List<News>> {
      * Query URL
      */
     private String mUrl;
+    private String mCategory;
 
-    public NewsLoader(Context context, String url) {
+    public NewsLoader(Context context, String url, String category) {
         super(context);
         mUrl = url;
+        mCategory = category;
     }
 
     @Override
@@ -36,12 +39,16 @@ public class NewsLoader extends AsyncTaskLoader<List<News>> {
         // Perform the network request, parse the response, and extract a list of news.
         List<News> newsList = QueryUtils.fetchEarthquakeData(mUrl);
 
+
+//        getContext().getContentResolver().delete(Uri.withAppendedPath(NewsEntry.CONTENT_URI,"5"), null, null);
+
         // Inserting list of news in the database.
         for (News news : newsList) {
             // Create a ContentValues object where column names are the keys,
             // and news attributes extracted from the JSON are the values.
             ContentValues values = new ContentValues();
             values.put(NewsEntry.COLUMN_NEWS_HEADLINE, news.getHeadline());
+            values.put(NewsEntry.COLUMN_NEWS_CATEGORY, mCategory);
             values.put(NewsEntry.COLUMN_NEWS_BODY_TEXT, news.getBodyText());
             values.put(NewsEntry.COLUMN_NEWS_THUMBNAIL, news.getThumbnail());
             values.put(NewsEntry.COLUMN_NEWS_WEB_URL, news.getWebUrl());

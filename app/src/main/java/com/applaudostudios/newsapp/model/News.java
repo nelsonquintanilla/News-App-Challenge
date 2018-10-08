@@ -9,12 +9,22 @@ public class News implements Parcelable {
     private String mBodyText;
     private String mThumbnail;
     private String mWebUrl;
+    private String mCategory;
 
-    public News(String mHeadline, String mBodyText, String mThumbnail, String mWebUrl) {
+    public String getCategory() {
+        return mCategory;
+    }
+
+    public void setCategory(String mCategory) {
+        this.mCategory = mCategory;
+    }
+
+    public News(String mHeadline, String mBodyText, String mThumbnail, String mWebUrl, String mCategory) {
         this.mHeadline = mHeadline;
         this.mBodyText = mBodyText;
         this.mThumbnail = mThumbnail;
         this.mWebUrl = mWebUrl;
+        this.mCategory = mCategory;
     }
 
     public String getHeadline() {

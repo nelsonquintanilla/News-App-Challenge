@@ -49,10 +49,11 @@ public class CategoryFragment extends Fragment implements RecyclerViewAdapter.Ca
      * @param url in this case, it's an url build by the buildUrl method
      * @return an instance of CategoryFragment
      */
-    public static CategoryFragment newInstance(String url) {
+    public static CategoryFragment newInstance(String url, String category) {
         CategoryFragment categoryFragment = new CategoryFragment();
         Bundle args = new Bundle();
         args.putString("someUrl", url);
+        args.putString("someCategory", category);
         categoryFragment.setArguments(args);
         return categoryFragment;
     }
@@ -118,13 +119,14 @@ public class CategoryFragment extends Fragment implements RecyclerViewAdapter.Ca
     public Loader onCreateLoader(int id, @Nullable Bundle args) {
         switch (id) {
             case 0:
-                return new NewsLoader(getActivity(), (getArguments()).getString("someUrl"));
+                return new NewsLoader(getActivity(), (getArguments()).getString("someUrl"),
+                        (getArguments()).getString("someCategory"));
 
             case 1:
                 // Define a projection that specifies the columns from the table we care about.
                 String[] projection = {
                         NewsEntry._ID,
-//                        NewsEntry.COLUMN_NEWS_CATEGORY,
+                        NewsEntry.COLUMN_NEWS_CATEGORY,
                         NewsEntry.COLUMN_NEWS_HEADLINE,
                         NewsEntry.COLUMN_NEWS_BODY_TEXT,
                         NewsEntry.COLUMN_NEWS_THUMBNAIL,
@@ -190,7 +192,7 @@ public class CategoryFragment extends Fragment implements RecyclerViewAdapter.Ca
         if(mCursor.moveToFirst()){
             // Loop through the table rows.
             do{
-                News news = new News("", "", "", "");
+                News news = new News("", "", "", "","");
                 news.setHeadline( mCursor.getString(mCursor.getColumnIndex(NewsEntry.COLUMN_NEWS_HEADLINE)) );
                 news.setBodyText( mCursor.getString(mCursor.getColumnIndex(NewsEntry.COLUMN_NEWS_BODY_TEXT)) );
                 news.setThumbnail( mCursor.getString(mCursor.getColumnIndex(NewsEntry.COLUMN_NEWS_THUMBNAIL)) );

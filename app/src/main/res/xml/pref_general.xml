@@ -1,14 +1,14 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <PreferenceCategory
-        android:title="GENERAL"
+        android:title="NIGHT THEME"
         android:key="pref_key_storage_settings" >
 
     <SwitchPreference
         android:defaultValue="false"
-        android:key="theme_switch"
-        android:summary="Change the theme of the App"
-        android:title="Theme"
+        android:key="@string/theme_switch"
+        android:summary="Switch on to enable Night Mode"
+        android:title="Enable Night Mode"
         android:id="@+id/theme_switch"/>
 
     </PreferenceCategory>

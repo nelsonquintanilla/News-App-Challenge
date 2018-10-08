@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
 //
 //        getContentResolver().update(Uri.withAppendedPath(NewsEntry.CONTENT_URI,"5"), values3,  null, null );
 
-//        getContentResolver().delete(Uri.withAppendedPath(NewsEntry.CONTENT_URI,"5"), null,  null );
+//        getContentResolver().delete(Uri.withAppendedPath(NewsEntry.CONTENT_URI,"5"), null,  null);
 
 //        getContentResolver().delete(NewsEntry.CONTENT_URI, null, null);
 

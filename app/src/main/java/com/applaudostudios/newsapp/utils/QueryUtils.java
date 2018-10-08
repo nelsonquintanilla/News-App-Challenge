@@ -143,7 +143,7 @@ public class QueryUtils {
             JSONArray results = response.getJSONArray("results");
 
             for (int i = 0; i < results.length(); i++) {
-                News news = new News("", "", "", "");
+                News news = new News("", "", "", "", "");
 
                 JSONObject currentNews = results.getJSONObject(i);
                 JSONObject fields = currentNews.getJSONObject("fields");

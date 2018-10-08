@@ -3,20 +3,13 @@ package com.applaudostudios.newsapp.fragments;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
-import android.preference.PreferenceScreen;
 import android.preference.SwitchPreference;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatDelegate;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.CompoundButton;
-import android.widget.Switch;
-import android.widget.ToggleButton;
 
 import com.applaudostudios.newsapp.R;
 
-public class MySettingsFragment extends PreferenceFragment implements Preference.OnPreferenceChangeListener {
+public class MySettingsFragment extends PreferenceFragment {
 
     public MySettingsFragment() {
     }
@@ -27,18 +20,21 @@ public class MySettingsFragment extends PreferenceFragment implements Preference
         // Load the preferences from an XML resource
         addPreferencesFromResource(R.xml.pref_general);
 
-        Preference themePreference = findPreference("theme_preference");
-        themePreference.setOnPreferenceChangeListener(this);
-    }
-
-    @Override
-    public boolean onPreferenceChange(Preference preference, Object o) {
-//        if(){
-//
-//        } else {
-//            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-//        }
-        return false;
+        final SwitchPreference themePreference = (SwitchPreference) findPreference(this.getResources().getString(R.string.theme_switch));
+        themePreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object o) {
+                if(themePreference.isChecked()){
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                    themePreference.setChecked(false);
+                }else {
+                    getActivity().setTheme(AppCompatDelegate.MODE_NIGHT_NO);
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                    themePreference.setChecked(true);
+                }
+                return false;
+            }
+        });
     }
 
 }

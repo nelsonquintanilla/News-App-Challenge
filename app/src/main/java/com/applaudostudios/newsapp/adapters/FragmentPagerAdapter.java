@@ -30,7 +30,7 @@ public class FragmentPagerAdapter extends FragmentStatePagerAdapter {
     // Returns a fragment associated wih each position
     @Override
     public Fragment getItem(int position) {
-        return CategoryFragment.newInstance(buildUrl(mTitles[position]));
+        return CategoryFragment.newInstance(buildUrl(mTitles[position]), mTitles[position]);
     }
 
     // Returns the number of pages in the ViewPager

@@ -50,7 +50,7 @@ public class SearchableActivity extends AppCompatActivity {
                 // Creating fragment.
                 searchFragment = CategoryFragment.newInstance(
                         "https://content.guardianapis.com/search?show-fields=headline%2Cthumbnail%2CbodyText&page=1&page-size=30&q="
-                        + query + "&api-key=f8bc1c2f-a416-4927-b866-b05b70de8f11");
+                        + query + "&api-key=f8bc1c2f-a416-4927-b866-b05b70de8f11", "");
                 FragmentManager fragmentManager = getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.fragment_container, searchFragment);
