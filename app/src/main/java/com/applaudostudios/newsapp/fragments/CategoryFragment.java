@@ -1,7 +1,6 @@
 package com.applaudostudios.newsapp.fragments;
 
 import android.content.Context;
-
 import android.database.Cursor;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -19,12 +18,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.applaudostudios.newsapp.R;
 import com.applaudostudios.newsapp.activities.DetailsActivity;
-import com.applaudostudios.newsapp.data.NewsContract;
+import com.applaudostudios.newsapp.adapters.RecyclerViewAdapter;
 import com.applaudostudios.newsapp.data.NewsContract.NewsEntry;
 import com.applaudostudios.newsapp.loaders.NewsLoader;
-import com.applaudostudios.newsapp.R;
-import com.applaudostudios.newsapp.adapters.RecyclerViewAdapter;
 import com.applaudostudios.newsapp.model.News;
 
 import java.util.ArrayList;

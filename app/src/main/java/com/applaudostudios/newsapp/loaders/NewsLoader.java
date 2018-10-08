@@ -36,6 +36,7 @@ public class NewsLoader extends AsyncTaskLoader<List<News>> {
         // Perform the network request, parse the response, and extract a list of news.
         List<News> newsList = QueryUtils.fetchEarthquakeData(mUrl);
 
+        // Inserting list of news in the database.
         for (News news : newsList) {
             // Create a ContentValues object where column names are the keys,
             // and news attributes extracted from the JSON are the values.

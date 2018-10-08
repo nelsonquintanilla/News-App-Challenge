@@ -4,6 +4,7 @@ package com.applaudostudios.newsapp.activities;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -12,6 +13,7 @@ import android.support.v4.content.Loader;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AppCompatDelegate;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -28,8 +30,15 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //Setting the theme
+        AppCompatDelegate.setDefaultNightMode(
+                AppCompatDelegate.MODE_NIGHT_AUTO);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Ensures that your app is properly initialized with default settings.
+        PreferenceManager.setDefaultValues(this, R.xml.pref_general, false);
 
         TabLayout tabLayout = findViewById(R.id.tab_layout);
         ViewPager viewPager = findViewById(R.id.viewpager);
@@ -104,7 +113,13 @@ public class MainActivity extends AppCompatActivity {
             case R.id.action_search2:
                 Intent intent = new Intent(this, SearchableActivity.class);
                 startActivity(intent);
-                return true;
+                break;
+            case R.id.action_choose_theme:
+                Intent SettingsIntent = new Intent(this, SettingsActivity.class);
+                startActivity(SettingsIntent);
+                break;
+            default:
+                break;
         }
         return super.onOptionsItemSelected(item);
     }

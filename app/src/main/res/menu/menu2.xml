@@ -2,6 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <item
+        android:id="@+id/action_choose_theme"
+        android:title="Settings"
+        app:showAsAction="never" />
+
     <!--Just for show the searchView widget and redirect to the Searchable activity when tapped.-->
     <item
         android:id="@+id/action_search2"

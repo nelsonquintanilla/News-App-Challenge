@@ -26,6 +26,9 @@
 
         <activity android:name=".activities.SearchableActivity" />
 
+        <activity android:name=".activities.SettingsActivity"
+            android:label="Settings"/>
+
         <provider
             android:authorities="com.applaudostudios.newsapp"
             android:name=".data.NewsProvider"

@@ -1,0 +1,16 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+        android:title="GENERAL"
+        android:key="pref_key_storage_settings" >
+
+    <SwitchPreference
+        android:defaultValue="false"
+        android:key="theme_switch"
+        android:summary="Change the theme of the App"
+        android:title="Theme"
+        android:id="@+id/theme_switch"/>
+
+    </PreferenceCategory>
+
+</PreferenceScreen>
