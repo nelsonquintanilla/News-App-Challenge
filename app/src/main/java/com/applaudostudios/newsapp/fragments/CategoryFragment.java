@@ -207,7 +207,7 @@ public class CategoryFragment extends Fragment implements RecyclerViewAdapter.Ca
     @Override
     public void onLoaderReset(@NonNull Loader loader) {
         switch (loader.getId()){
-            case 1:
+            case CURSOR_LOADER_ID:
                 mCursor.close();
                 break;
             default:

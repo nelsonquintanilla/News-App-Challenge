@@ -33,7 +33,7 @@ public class DetailsActivity extends AppCompatActivity {
 
         // Creates a new instance of the details fragment and pass in the news details to show them
         // in there.
-        DetailsFragment fragment = DetailsFragment.newInstance(mNews, mNews.getThumbnail());
+        DetailsFragment fragment = DetailsFragment.newInstance(mNews, mNews.getThumbnail(), mNews.getNewsId());
 
         // To communicate between this activity and the fragment created above.
         FragmentManager fragmentManager = getSupportFragmentManager();

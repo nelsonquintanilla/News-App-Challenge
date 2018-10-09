@@ -81,13 +81,17 @@ public class News implements Parcelable {
         dest.writeString(this.mBodyText);
         dest.writeString(this.mThumbnail);
         dest.writeString(this.mWebUrl);
+        dest.writeString(this.mCategory);
+        dest.writeString(this.mNewsId);
     }
 
-    private News(Parcel in) {
+    protected News(Parcel in) {
         this.mHeadline = in.readString();
         this.mBodyText = in.readString();
         this.mThumbnail = in.readString();
         this.mWebUrl = in.readString();
+        this.mCategory = in.readString();
+        this.mNewsId = in.readString();
     }
 
     public static final Parcelable.Creator<News> CREATOR = new Parcelable.Creator<News>() {

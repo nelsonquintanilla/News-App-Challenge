@@ -59,8 +59,8 @@ public class NewsProvider extends ContentProvider {
         // This URI is used to provide access to MULTIPLE rows of the saved news table.
         sUriMatcher.addURI(NewsContract.CONTENT_AUTHORITY, NewsContract.PATH_SAVED_NEWS, SAVED_NEWS);
 
-        // This URI is used to provide access to ONE single row of the saved news table.
-        sUriMatcher.addURI(NewsContract.CONTENT_AUTHORITY, NewsContract.PATH_SAVED_NEWS + "/#", SAVED_NEWS_ID);
+//        // This URI is used to provide access to ONE single row of the saved news table.
+//        sUriMatcher.addURI(NewsContract.CONTENT_AUTHORITY, NewsContract.PATH_SAVED_NEWS, SAVED_NEWS_ID);
     }
 
     /**
@@ -101,10 +101,8 @@ public class NewsProvider extends ContentProvider {
                         null, null, sortOrder);
                 break;
 
-            case SAVED_NEWS_ID:
-                selection = NewsEntry._ID + "=?";
-                selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
-                cursor = db.query(NewsEntry.TABLE_NAME, projection, selection, selectionArgs,
+            case SAVED_NEWS:
+                cursor = db.query(SavedNewsEntry.TABLE2_NAME, projection, selection, selectionArgs,
                         null, null, sortOrder);
 
             default:
@@ -203,6 +201,10 @@ public class NewsProvider extends ContentProvider {
                 return NewsEntry.CONTENT_LIST_TYPE;
             case NEWS_ID:
                 return NewsEntry.CONTENT_ITEM_TYPE;
+            case SAVED_NEWS:
+                return SavedNewsEntry.CONTENT_LIST_TYPE;
+            case SAVED_NEWS_ID:
+                return SavedNewsEntry.CONTENT_ITEM_TYPE;
             default:
                 throw new IllegalStateException("Unknown URI " + uri + " with match " + match);
         }

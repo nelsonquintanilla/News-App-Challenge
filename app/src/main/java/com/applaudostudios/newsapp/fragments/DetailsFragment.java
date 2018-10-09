@@ -2,6 +2,7 @@ package com.applaudostudios.newsapp.fragments;
 
 import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -25,11 +26,12 @@ import com.applaudostudios.newsapp.model.News;
 import com.applaudostudios.newsapp.data.NewsContract.SavedNewsEntry;
 
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 /**
- * A simple {@link Fragment} subclass.
+ * A simple Fragment subclass.
  */
 public class DetailsFragment extends Fragment implements LoaderManager.LoaderCallbacks,
         View.OnClickListener, CompoundButton.OnCheckedChangeListener {
@@ -40,6 +42,9 @@ public class DetailsFragment extends Fragment implements LoaderManager.LoaderCal
     public static final int CURSOR_LOADER_ID = 1;
     public static final int THUMBNAIL_LOADER_ID = 2;
     private News mNewsDetails;
+    private Cursor mCursor;
+    private boolean mVariable;
+    private ToggleButton readMeLaterButton;
 
 
     public DetailsFragment() {
@@ -48,10 +53,11 @@ public class DetailsFragment extends Fragment implements LoaderManager.LoaderCal
 
     // Creates a new instance of the fragment and takes as arguments an url (the thumbnail url)
     // and the details of the news clicked.
-    public static DetailsFragment newInstance(News news, String url) {
+    public static DetailsFragment newInstance(News news, String url, String id) {
         Bundle args = new Bundle();
         args.putParcelable("NEWS_KEY", news);
         args.putString("someUrl", url);
+        args.putString("someId", id);
         DetailsFragment fragment = new DetailsFragment();
         fragment.setArguments(args);
         return fragment;
@@ -68,6 +74,7 @@ public class DetailsFragment extends Fragment implements LoaderManager.LoaderCal
         // Declares loadManager
         LoaderManager loaderManager = getLoaderManager();
         loaderManager.restartLoader(THUMBNAIL_LOADER_ID, null, this);
+        loaderManager.initLoader(CURSOR_LOADER_ID, null, this);
     }
 
     @Override
@@ -83,13 +90,9 @@ public class DetailsFragment extends Fragment implements LoaderManager.LoaderCal
         mThumbnail = mView.findViewById(R.id.thumbnail_image);
         mThumbnail.setVisibility(View.INVISIBLE);
         ImageView webUrlImage = mView.findViewById(R.id.web_url_image);
-        ToggleButton readMeLaterButton = mView.findViewById(R.id.read_me_later_button);
-        readMeLaterButton.setOnCheckedChangeListener(this);
         webUrlImage.setOnClickListener(this);
-
-//        LoaderManager loaderManager = getLoaderManager();
-//        loaderManager.initLoader(CURSOR_LOADER_ID, null, this);
-
+        readMeLaterButton = mView.findViewById(R.id.read_me_later_button);
+        readMeLaterButton.setOnCheckedChangeListener(this);
         return mView;
     }
 
@@ -120,9 +123,9 @@ public class DetailsFragment extends Fragment implements LoaderManager.LoaderCal
                             // Columns to include in the resulting Cursor
                             projection,
                             // No selection clause
-                            null,
+                            SavedNewsEntry.COLUMN_NEWS_ID + "=?",
                             // No selection arguments
-                            null,
+                            new String[] {(getArguments()).getString("someId")},
                             // Default sort order
                             null);
                 }
@@ -141,11 +144,12 @@ public class DetailsFragment extends Fragment implements LoaderManager.LoaderCal
                 break;
 
             case CURSOR_LOADER_ID:
-//                List<News> dataExtracted = getCursorData(data);
-//                // Updates the data in the adapter
-//                recyclerViewAdapter.setData(dataExtracted);
-//                // Saving data to use it later on on the onItemClickMethod
-//                mData = dataExtracted;
+                mVariable = getCursorData(data);
+                if(mVariable){
+                    readMeLaterButton.setChecked(true);
+                } else {
+                    readMeLaterButton.setChecked(false);
+                }
                 break;
 
             default:
@@ -153,9 +157,24 @@ public class DetailsFragment extends Fragment implements LoaderManager.LoaderCal
         }
     }
 
+    public boolean getCursorData(Object data){
+        mCursor = (Cursor) data;
+        // If table has rows.
+        if(mCursor.moveToFirst()){
+            return true;
+        }
+        return false;
+    }
+
     @Override
     public void onLoaderReset(@NonNull Loader loader) {
-        //Empty.For now...
+        switch (loader.getId()){
+            case CURSOR_LOADER_ID:
+                mCursor.close();
+                break;
+            default:
+                break;
+        }
     }
 
 
