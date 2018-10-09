@@ -64,14 +64,16 @@ public class CategoryFragment extends Fragment implements RecyclerViewAdapter.Ca
         setHasOptionsMenu(true);
     }
 
+//    public void dataIsAvailable(List<News> data){
+//        mData = data;
+//    }
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View mView = inflater.inflate(R.layout.fragment_category, container, false);
-
         // Inflates the layout for this fragment
         TextView mEmptyStateTextView = mView.findViewById(R.id.empty_view);
-
         // Checks the status of the network connection
         ConnectivityManager connMgr = (ConnectivityManager)
                 (getActivity()).getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -79,27 +81,30 @@ public class CategoryFragment extends Fragment implements RecyclerViewAdapter.Ca
         if (connMgr != null) {
             networkInfo = connMgr.getActiveNetworkInfo();
         }
+        // Gets a reference to the LoaderManager, in order to interact with loaders
+        LoaderManager loaderManager;
 
         // If there is a network connection, fetches data
         if (networkInfo != null && networkInfo.isConnected()) {
-            // Gets a reference to the LoaderManager, in order to interact with loaders
-            LoaderManager loaderManager = getLoaderManager();
-
+            loaderManager = getLoaderManager();
             // Initializes the loader
             loaderManager.restartLoader(NEWS_LOADER_ID, null, this);
 
         } else {
             // Otherwise, displays error
             // First, hides loading indicator so error message will be visible
-            View loadingIndicator = mView.findViewById(R.id.loading_indicator);
-            loadingIndicator.setVisibility(View.GONE);
+            if(mData == null){
+                View loadingIndicator = mView.findViewById(R.id.loading_indicator);
+                loadingIndicator.setVisibility(View.GONE);
+                // Updates empty state with no connection error message
+                mEmptyStateTextView.setText(R.string.no_internet_connection);
 
-            LoaderManager loaderManager2 = getLoaderManager();
-
-            loaderManager2.initLoader(CURSOR_LOADER_ID, null, this);
-
-//            // Updates empty state with no connection error message
-//            mEmptyStateTextView.setText(R.string.no_internet_connection);
+            } else {
+                View loadingIndicator = mView.findViewById(R.id.loading_indicator);
+                loadingIndicator.setVisibility(View.GONE);
+                loaderManager = getLoaderManager();
+                loaderManager.initLoader(CURSOR_LOADER_ID, null, this);
+            }
         }
 
         // Declares and initializes the recyclerView object
@@ -214,22 +219,11 @@ public class CategoryFragment extends Fragment implements RecyclerViewAdapter.Ca
         }
     }
 
-//    @Override
-//    public void onLoadFinished(@NonNull Loader<List<News>> loader, List<News> data) {
-//        // Removing loading indicator
-//        View loadingIndicator = (getView()).findViewById(R.id.loading_indicator);
-//        loadingIndicator.setVisibility(View.GONE);
-//        // Updates the data in the adapter
-//        recyclerViewAdapter.setData(data);
-//        // Saving data to use it later on on the onItemClickMethod
-//        mData = data;
-//    }
-
-
     // Method required because of the CallBack interface implementation.
     @Override
     public void onItemClick(int position) {
         startActivity(DetailsActivity.putNews(getContext(), mData.get(position)));
     }
+
 
 }

@@ -38,7 +38,10 @@ public class NewsLoader extends AsyncTaskLoader<List<News>> {
         // Perform the network request, parse the response, and extract a list of news.
         List<News> newsList = QueryUtils.fetchEarthquakeData(mUrl);
 
-        getContext().getContentResolver().delete(NewsEntry.CONTENT_URI, NewsEntry.COLUMN_NEWS_CATEGORY + "=?", new String[] {mCategory});
+        getContext().getContentResolver().delete(
+                NewsEntry.CONTENT_URI,
+                NewsEntry.COLUMN_NEWS_CATEGORY + "=?",
+                new String[] {mCategory});
 
         // Inserting list of news in the database.
         for (News news : newsList) {

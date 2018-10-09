@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.applaudostudios.newsapp.R;
+import com.applaudostudios.newsapp.fragments.CategoryFragment;
 import com.applaudostudios.newsapp.model.News;
 
 import java.util.ArrayList;
@@ -22,8 +23,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     // When this method is called in the CategoryFragment, the  notifyDataSetChanged() method
     // is causing the execution of all RecyclerViewAdapter methods again, so that the data is
     // passed in and bound to the holders.
-    public void setData(List<News> Data) {
-        mData = Data;
+    public void setData(List<News> data) {
+        mData = data;
         notifyDataSetChanged();
     }
 
@@ -75,6 +76,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public interface CallBack {
         void onItemClick(int position);
     }
+
 
 
 }
