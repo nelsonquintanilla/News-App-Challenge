@@ -101,6 +101,12 @@ public class NewsProvider extends ContentProvider {
                         null, null, sortOrder);
                 break;
 
+            case SAVED_NEWS_ID:
+                selection = NewsEntry._ID + "=?";
+                selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
+                cursor = db.query(NewsEntry.TABLE_NAME, projection, selection, selectionArgs,
+                        null, null, sortOrder);
+
             default:
                 break;
         }
@@ -124,6 +130,7 @@ public class NewsProvider extends ContentProvider {
                 }
                 // Return the new URI with the ID (of the newly inserted row) appended at the end.
                 return ContentUris.withAppendedId(uri, id);
+
             case SAVED_NEWS:
                 long id2 = db.insert(SavedNewsEntry.TABLE2_NAME, null, contentValues);
                 // If the ID is -1, then the insertion failed. Log an error and return null.
@@ -133,6 +140,7 @@ public class NewsProvider extends ContentProvider {
                 }
                 // Return the new URI with the ID (of the newly inserted row) appended at the end.
                 return ContentUris.withAppendedId(uri, id2);
+
             default:
                 throw new IllegalArgumentException("Insertion is not supported for " + uri);
         }
@@ -144,22 +152,23 @@ public class NewsProvider extends ContentProvider {
             @Nullable ContentValues contentValues,
             @Nullable String selection,
             @Nullable String[] selectionArgs) {
-
-        SQLiteDatabase db = mDbHelper.getWritableDatabase();
-
-        int match = sUriMatcher.match(uri);
-        switch (match) {
-            case NEWS:
-                return db.update(NewsEntry.TABLE_NAME, contentValues, selection, selectionArgs);
-
-            case NEWS_ID:
-                selection = NewsEntry._ID + "=?";
-                selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
-                return db.update(NewsEntry.TABLE_NAME, contentValues, selection, selectionArgs);
-
-            default:
-                throw new IllegalArgumentException("Update is not supported for " + uri);
-        }
+//
+//        SQLiteDatabase db = mDbHelper.getWritableDatabase();
+//
+//        int match = sUriMatcher.match(uri);
+//        switch (match) {
+//            case NEWS:
+//                return db.update(NewsEntry.TABLE_NAME, contentValues, selection, selectionArgs);
+//
+//            case NEWS_ID:
+//                selection = NewsEntry._ID + "=?";
+//                selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
+//                return db.update(NewsEntry.TABLE_NAME, contentValues, selection, selectionArgs);
+//
+//            default:
+//                throw new IllegalArgumentException("Update is not supported for " + uri);
+//        }
+        return 0;
     }
 
     @Override
@@ -198,6 +207,5 @@ public class NewsProvider extends ContentProvider {
                 throw new IllegalStateException("Unknown URI " + uri + " with match " + match);
         }
     }
-
 
 }

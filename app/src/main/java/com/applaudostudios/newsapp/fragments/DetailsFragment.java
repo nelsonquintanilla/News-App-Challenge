@@ -9,6 +9,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
+import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,21 +22,22 @@ import android.widget.ToggleButton;
 import com.applaudostudios.newsapp.R;
 import com.applaudostudios.newsapp.loaders.ThumbnailLoader;
 import com.applaudostudios.newsapp.model.News;
-import com.applaudostudios.newsapp.data.NewsContract.NewsEntry;
 import com.applaudostudios.newsapp.data.NewsContract.SavedNewsEntry;
 
 
+import java.util.List;
 import java.util.Objects;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class DetailsFragment extends Fragment implements LoaderManager.LoaderCallbacks<Bitmap>,
+public class DetailsFragment extends Fragment implements LoaderManager.LoaderCallbacks,
         View.OnClickListener, CompoundButton.OnCheckedChangeListener {
     private String mHeadline;
     private String mBodyText;
     private String mWebUrl;
     private ImageView mThumbnail;
+    public static final int CURSOR_LOADER_ID = 1;
     public static final int THUMBNAIL_LOADER_ID = 2;
     private News mNewsDetails;
 
@@ -84,27 +86,90 @@ public class DetailsFragment extends Fragment implements LoaderManager.LoaderCal
         ToggleButton readMeLaterButton = mView.findViewById(R.id.read_me_later_button);
         readMeLaterButton.setOnCheckedChangeListener(this);
         webUrlImage.setOnClickListener(this);
+
+//        LoaderManager loaderManager = getLoaderManager();
+//        loaderManager.initLoader(CURSOR_LOADER_ID, null, this);
+
         return mView;
     }
 
     // Methods required because of the implementation of the LoaderCallbacks interface
     @NonNull
     @Override
-    public Loader<Bitmap> onCreateLoader(int id, @Nullable Bundle args) {
-        return new ThumbnailLoader(Objects.requireNonNull(getActivity()),
-                Objects.requireNonNull(getArguments()).getString("someUrl"));
+    public Loader onCreateLoader(int id, @Nullable Bundle args) {
+        switch (id){
+            case THUMBNAIL_LOADER_ID:
+                return new ThumbnailLoader(Objects.requireNonNull(getActivity()),
+                        Objects.requireNonNull(getArguments()).getString("someUrl"));
+            case CURSOR_LOADER_ID:
+                // Define a projection that specifies the columns from the table we care about.
+                String[] projection = {
+                        SavedNewsEntry._ID,
+                        SavedNewsEntry.COLUMN_NEWS_ID,
+                        SavedNewsEntry.COLUMN_NEWS_HEADLINE,
+                        SavedNewsEntry.COLUMN_NEWS_BODY_TEXT,
+                        SavedNewsEntry.COLUMN_NEWS_THUMBNAIL,
+                        SavedNewsEntry.COLUMN_NEWS_WEB_URL};
+
+                // This loader will execute the ContentProvider's query method on a background thread
+                // Parent activity context
+                if(getContext()!=null){
+                    return new CursorLoader( getContext(),
+                            // Provider content URI to query
+                            SavedNewsEntry.CONTENT_URI,
+                            // Columns to include in the resulting Cursor
+                            projection,
+                            // No selection clause
+                            null,
+                            // No selection arguments
+                            null,
+                            // Default sort order
+                            null);
+                }
+            default:
+                break;
+        }
+        return null;
     }
 
     @Override
-    public void onLoadFinished(@NonNull Loader<Bitmap> loader, Bitmap data) {
-        mThumbnail.setImageBitmap(data);
-        mThumbnail.setVisibility(View.VISIBLE);
+    public void onLoadFinished(@NonNull Loader loader, Object data) {
+        switch (loader.getId()) {
+            case THUMBNAIL_LOADER_ID:
+                mThumbnail.setImageBitmap((Bitmap) data);
+                mThumbnail.setVisibility(View.VISIBLE);
+                break;
+
+            case CURSOR_LOADER_ID:
+//                List<News> dataExtracted = getCursorData(data);
+//                // Updates the data in the adapter
+//                recyclerViewAdapter.setData(dataExtracted);
+//                // Saving data to use it later on on the onItemClickMethod
+//                mData = dataExtracted;
+                break;
+
+            default:
+                break;
+        }
     }
 
     @Override
-    public void onLoaderReset(@NonNull Loader<Bitmap> loader) {
-        // Empty.
+    public void onLoaderReset(@NonNull Loader loader) {
+        //Empty.For now...
     }
+
+
+//    @Override
+//    public void onLoadFinished(@NonNull Loader<Bitmap> loader, Bitmap data) {
+//        mThumbnail.setImageBitmap(data);
+//        mThumbnail.setVisibility(View.VISIBLE);
+//    }
+//
+//    @Override
+//    public void onLoaderReset(@NonNull Loader<Bitmap> loader) {
+//        // Empty.
+//    }
+
 
     // Makes the intent to open the url in a browser when the webUrl image is clicked.
     @Override
