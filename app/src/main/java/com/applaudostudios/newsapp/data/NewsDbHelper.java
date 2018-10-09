@@ -5,6 +5,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.applaudostudios.newsapp.data.NewsContract.NewsEntry;
+import com.applaudostudios.newsapp.data.NewsContract.SavedNewsEntry;
+
 
 public class NewsDbHelper extends SQLiteOpenHelper {
 
@@ -37,13 +39,13 @@ public class NewsDbHelper extends SQLiteOpenHelper {
                 + NewsEntry.COLUMN_NEWS_WEB_URL + " TEXT);";
 
         // Creates a String that contains the SQL statement to create the news saved table.
-        String SQL_CREATES_SAVED_NEWS_TABLE = "CREATE TABLE " + NewsEntry.TABLE2_NAME + " ("
-                + NewsEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + NewsEntry.COLUMN_NEWS_CATEGORY + " TEXT, "
-                + NewsEntry.COLUMN_NEWS_HEADLINE + " TEXT, "
-                + NewsEntry.COLUMN_NEWS_BODY_TEXT + " TEXT DEFAULT 'empty', "
-                + NewsEntry.COLUMN_NEWS_THUMBNAIL + " TEXT, "
-                + NewsEntry.COLUMN_NEWS_WEB_URL + " TEXT);";
+        String SQL_CREATES_SAVED_NEWS_TABLE = "CREATE TABLE " + SavedNewsEntry.TABLE2_NAME + " ("
+                + SavedNewsEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+//                + NewsEntry.COLUMN_NEWS_CATEGORY + " TEXT, "
+                + SavedNewsEntry.COLUMN_NEWS_HEADLINE + " TEXT, "
+                + SavedNewsEntry.COLUMN_NEWS_BODY_TEXT + " TEXT DEFAULT 'empty', "
+                + SavedNewsEntry.COLUMN_NEWS_THUMBNAIL + " TEXT, "
+                + SavedNewsEntry.COLUMN_NEWS_WEB_URL + " TEXT);";
 
         // Executes the SQL statements
         db.execSQL(SQL_CREATES_NEWS_TABLE);

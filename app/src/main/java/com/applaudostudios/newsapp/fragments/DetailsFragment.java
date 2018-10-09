@@ -1,5 +1,6 @@
 package com.applaudostudios.newsapp.fragments;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -12,24 +13,31 @@ import android.support.v4.content.Loader;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import com.applaudostudios.newsapp.R;
 import com.applaudostudios.newsapp.loaders.ThumbnailLoader;
 import com.applaudostudios.newsapp.model.News;
+import com.applaudostudios.newsapp.data.NewsContract.NewsEntry;
+import com.applaudostudios.newsapp.data.NewsContract.SavedNewsEntry;
+
 
 import java.util.Objects;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class DetailsFragment extends Fragment implements LoaderManager.LoaderCallbacks<Bitmap>, View.OnClickListener {
+public class DetailsFragment extends Fragment implements LoaderManager.LoaderCallbacks<Bitmap>,
+        View.OnClickListener, CompoundButton.OnCheckedChangeListener {
     private String mHeadline;
     private String mBodyText;
     private String mWebUrl;
     private ImageView mThumbnail;
     public static final int THUMBNAIL_LOADER_ID = 2;
+    private News mNewsDetails;
 
 
     public DetailsFragment() {
@@ -50,8 +58,9 @@ public class DetailsFragment extends Fragment implements LoaderManager.LoaderCal
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        News mNews = Objects.requireNonNull(getArguments()).getParcelable("NEWS_KEY");
-        mHeadline = Objects.requireNonNull(mNews).getHeadline();
+        News mNews = (getArguments()).getParcelable("NEWS_KEY");
+        mNewsDetails = mNews;
+        mHeadline = mNews.getHeadline();
         mBodyText = mNews.getBodyText();
         mWebUrl = mNews.getWebUrl();
         // Declares loadManager
@@ -72,6 +81,8 @@ public class DetailsFragment extends Fragment implements LoaderManager.LoaderCal
         mThumbnail = mView.findViewById(R.id.thumbnail_image);
         mThumbnail.setVisibility(View.INVISIBLE);
         ImageView webUrlImage = mView.findViewById(R.id.web_url_image);
+        ToggleButton readMeLaterButton = mView.findViewById(R.id.read_me_later_button);
+        readMeLaterButton.setOnCheckedChangeListener(this);
         webUrlImage.setOnClickListener(this);
         return mView;
     }
@@ -106,6 +117,26 @@ public class DetailsFragment extends Fragment implements LoaderManager.LoaderCal
                 break;
             default:
                 break;
+        }
+    }
+
+    public void insertNews() {
+        ContentValues values = new ContentValues();
+        values.put(SavedNewsEntry.COLUMN_NEWS_HEADLINE, mNewsDetails.getHeadline());
+        values.put(SavedNewsEntry.COLUMN_NEWS_BODY_TEXT, mNewsDetails.getBodyText());
+        values.put(SavedNewsEntry.COLUMN_NEWS_THUMBNAIL, mNewsDetails.getThumbnail());
+        values.put(SavedNewsEntry.COLUMN_NEWS_WEB_URL, mNewsDetails.getWebUrl());
+
+        // returning the content URI.
+        Uri newUri = getContext().getContentResolver().insert(SavedNewsEntry.CONTENT_URI, values);
+    }
+
+    @Override
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        if (isChecked) {
+            insertNews();
+        } else {
+            // The toggle is disabled
         }
     }
 

@@ -12,6 +12,7 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.applaudostudios.newsapp.data.NewsContract.NewsEntry;
+import com.applaudostudios.newsapp.data.NewsContract.SavedNewsEntry;
 
 public class NewsProvider extends ContentProvider {
 
@@ -31,6 +32,16 @@ public class NewsProvider extends ContentProvider {
     public static final int NEWS_ID = 101;
 
     /**
+     * URI matcher code for the content URI for a single news in the saved news table
+     */
+    public static final int SAVED_NEWS = 200;
+
+    /**
+     * URI matcher code for the content URI for a single news in the saved news table
+     */
+    public static final int SAVED_NEWS_ID = 201;
+
+    /**
      * UriMatcher object to match a content URI to a corresponding code.
      * The input passed into the constructor represents the code to return for the root URI.
      * It's common to use NO_MATCH as the input for this case.
@@ -42,12 +53,14 @@ public class NewsProvider extends ContentProvider {
         // This URI is used to provide access to MULTIPLE rows of the news table.
         sUriMatcher.addURI(NewsContract.CONTENT_AUTHORITY, NewsContract.PATH_NEWS, NEWS);
 
-        // This URI is used to provide access to ONE single row of the pets table.
+        // This URI is used to provide access to ONE single row of the news table.
         sUriMatcher.addURI(NewsContract.CONTENT_AUTHORITY, NewsContract.PATH_NEWS + "/#", NEWS_ID);
 
-//        // This URI is used to provide access to MULTIPLE rows of the same category in the
-//        // the news table.
-//        sUriMatcher.addURI(NewsContract.CONTENT_AUTHORITY, NewsContract.PATH_NEWS, NEWS_CATEGORY);
+        // This URI is used to provide access to MULTIPLE rows of the saved news table.
+        sUriMatcher.addURI(NewsContract.CONTENT_AUTHORITY, NewsContract.PATH_SAVED_NEWS, SAVED_NEWS);
+
+        // This URI is used to provide access to ONE single row of the saved news table.
+        sUriMatcher.addURI(NewsContract.CONTENT_AUTHORITY, NewsContract.PATH_SAVED_NEWS + "/#", SAVED_NEWS_ID);
     }
 
     /**
@@ -111,7 +124,15 @@ public class NewsProvider extends ContentProvider {
                 }
                 // Return the new URI with the ID (of the newly inserted row) appended at the end.
                 return ContentUris.withAppendedId(uri, id);
-
+            case SAVED_NEWS:
+                long id2 = db.insert(SavedNewsEntry.TABLE2_NAME, null, contentValues);
+                // If the ID is -1, then the insertion failed. Log an error and return null.
+                if (id2 == -1) {
+                    Log.e(LOG_TAG, "Failed to insert row for " + uri);
+                    return null;
+                }
+                // Return the new URI with the ID (of the newly inserted row) appended at the end.
+                return ContentUris.withAppendedId(uri, id2);
             default:
                 throw new IllegalArgumentException("Insertion is not supported for " + uri);
         }

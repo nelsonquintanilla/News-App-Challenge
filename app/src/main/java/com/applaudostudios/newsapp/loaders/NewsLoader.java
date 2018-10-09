@@ -54,7 +54,7 @@ public class NewsLoader extends AsyncTaskLoader<List<News>> {
             values.put(NewsEntry.COLUMN_NEWS_THUMBNAIL, news.getThumbnail());
             values.put(NewsEntry.COLUMN_NEWS_WEB_URL, news.getWebUrl());
 
-            // returning the content URI for the new pet.
+            // returning the content URI.
             getContext().getContentResolver().insert(NewsEntry.CONTENT_URI, values);
         }
 
