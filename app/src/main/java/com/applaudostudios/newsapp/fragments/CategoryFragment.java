@@ -118,11 +118,11 @@ public class CategoryFragment extends Fragment implements RecyclerViewAdapter.Ca
     @Override
     public Loader onCreateLoader(int id, @Nullable Bundle args) {
         switch (id) {
-            case 0:
+            case NEWS_LOADER_ID:
                 return new NewsLoader(getActivity(), (getArguments()).getString("someUrl"),
                         (getArguments()).getString("someCategory"));
 
-            case 1:
+            case CURSOR_LOADER_ID:
                 // Define a projection that specifies the columns from the table we care about.
                 String[] projection = {
                         NewsEntry._ID,
@@ -141,9 +141,9 @@ public class CategoryFragment extends Fragment implements RecyclerViewAdapter.Ca
                             // Columns to include in the resulting Cursor
                             projection,
                             // No selection clause
-                            null,
+                            NewsEntry.COLUMN_NEWS_CATEGORY + "=?",
                             // No selection arguments
-                            null,
+                            new String[] {(getArguments()).getString("someCategory")},
                             // Default sort order
                             null);
                 }
@@ -157,7 +157,7 @@ public class CategoryFragment extends Fragment implements RecyclerViewAdapter.Ca
     public void onLoadFinished(@NonNull Loader loader, Object data) {
         View loadingIndicator;
         switch (loader.getId()) {
-            case 0:
+            case NEWS_LOADER_ID:
                 // Removing loading indicator
                 loadingIndicator = (getView()).findViewById(R.id.loading_indicator);
                 loadingIndicator.setVisibility(View.GONE);
@@ -167,7 +167,7 @@ public class CategoryFragment extends Fragment implements RecyclerViewAdapter.Ca
                 mData = (List<News>) data;
                 break;
 
-            case 1:
+            case CURSOR_LOADER_ID:
                 // Removing loading indicator
                 loadingIndicator = (getView()).findViewById(R.id.loading_indicator);
                 loadingIndicator.setVisibility(View.GONE);

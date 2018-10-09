@@ -26,7 +26,7 @@ public final class NewsContract {
     public static final Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
 
     /**
-     * Stores the path for this tables which will be appended to the base content URI.
+     * Stores the path for this table which will be appended to the base content URI.
      */
     public static final String PATH_NEWS = "news";
 
