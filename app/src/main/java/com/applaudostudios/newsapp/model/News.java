@@ -10,6 +10,15 @@ public class News implements Parcelable {
     private String mThumbnail;
     private String mWebUrl;
     private String mCategory;
+    private String mNewsId;
+
+    public String getNewsId() {
+        return mNewsId;
+    }
+
+    public void setNewsId(String mNewsId) {
+        this.mNewsId = mNewsId;
+    }
 
     public String getCategory() {
         return mCategory;
@@ -19,12 +28,13 @@ public class News implements Parcelable {
         this.mCategory = mCategory;
     }
 
-    public News(String mHeadline, String mBodyText, String mThumbnail, String mWebUrl, String mCategory) {
+    public News(String mHeadline, String mBodyText, String mThumbnail, String mWebUrl, String mCategory, String mNewsId) {
         this.mHeadline = mHeadline;
         this.mBodyText = mBodyText;
         this.mThumbnail = mThumbnail;
         this.mWebUrl = mWebUrl;
         this.mCategory = mCategory;
+        this.mNewsId = mNewsId;
     }
 
     public String getHeadline() {

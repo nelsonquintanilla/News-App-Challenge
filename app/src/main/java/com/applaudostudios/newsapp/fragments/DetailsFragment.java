@@ -122,6 +122,7 @@ public class DetailsFragment extends Fragment implements LoaderManager.LoaderCal
 
     public void insertNews() {
         ContentValues values = new ContentValues();
+        values.put(SavedNewsEntry.COLUMN_NEWS_ID, mNewsDetails.getNewsId());
         values.put(SavedNewsEntry.COLUMN_NEWS_HEADLINE, mNewsDetails.getHeadline());
         values.put(SavedNewsEntry.COLUMN_NEWS_BODY_TEXT, mNewsDetails.getBodyText());
         values.put(SavedNewsEntry.COLUMN_NEWS_THUMBNAIL, mNewsDetails.getThumbnail());

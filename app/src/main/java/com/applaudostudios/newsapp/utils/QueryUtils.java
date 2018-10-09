@@ -1,6 +1,5 @@
 package com.applaudostudios.newsapp.utils;
 
-import android.content.ContentValues;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -143,10 +142,13 @@ public class QueryUtils {
             JSONArray results = response.getJSONArray("results");
 
             for (int i = 0; i < results.length(); i++) {
-                News news = new News("", "", "", "", "");
+                News news = new News("", "", "", "", "", "");
 
                 JSONObject currentNews = results.getJSONObject(i);
                 JSONObject fields = currentNews.getJSONObject("fields");
+
+                if (currentNews.has("id"))
+                    news.setNewsId(currentNews.getString("id"));
 
                 if (currentNews.has("webUrl"))
                     news.setWebUrl(currentNews.getString("webUrl"));

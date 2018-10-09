@@ -153,15 +153,12 @@ public final class NewsContract {
          */
         public static final String _ID = BaseColumns._ID;
 
-//        /**
-//         * Category of the news.
-//         *
-//         * The only possible values are CATEGORY_SPORTS, CATEGORY_POLITICS, CATEGORY_BUSINESS,
-//         * CATEGORY_TECH and CATEGORY_WORLD.
-//         *
-//         * Type: TEXT
-//         */
-//        public static final String COLUMN_NEWS_CATEGORY = "category";
+        /**
+         * id of the news.
+         *
+         * Type: TEXT
+         */
+        public static final String COLUMN_NEWS_ID = "id";
 
         /**
          * Headline of the news.

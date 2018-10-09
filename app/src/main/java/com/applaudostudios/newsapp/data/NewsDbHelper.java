@@ -41,7 +41,7 @@ public class NewsDbHelper extends SQLiteOpenHelper {
         // Creates a String that contains the SQL statement to create the news saved table.
         String SQL_CREATES_SAVED_NEWS_TABLE = "CREATE TABLE " + SavedNewsEntry.TABLE2_NAME + " ("
                 + SavedNewsEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-//                + NewsEntry.COLUMN_NEWS_CATEGORY + " TEXT, "
+                + SavedNewsEntry.COLUMN_NEWS_ID + " TEXT, "
                 + SavedNewsEntry.COLUMN_NEWS_HEADLINE + " TEXT, "
                 + SavedNewsEntry.COLUMN_NEWS_BODY_TEXT + " TEXT DEFAULT 'empty', "
                 + SavedNewsEntry.COLUMN_NEWS_THUMBNAIL + " TEXT, "

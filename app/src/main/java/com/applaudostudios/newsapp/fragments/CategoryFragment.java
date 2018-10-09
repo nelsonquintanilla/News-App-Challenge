@@ -193,7 +193,7 @@ public class CategoryFragment extends Fragment implements RecyclerViewAdapter.Ca
         if(mCursor.moveToFirst()){
             // Loop through the table rows.
             do{
-                News news = new News("", "", "", "","");
+                News news = new News("", "", "", "","", "");
                 news.setHeadline( mCursor.getString(mCursor.getColumnIndex(NewsEntry.COLUMN_NEWS_HEADLINE)) );
                 news.setBodyText( mCursor.getString(mCursor.getColumnIndex(NewsEntry.COLUMN_NEWS_BODY_TEXT)) );
                 news.setThumbnail( mCursor.getString(mCursor.getColumnIndex(NewsEntry.COLUMN_NEWS_THUMBNAIL)) );
