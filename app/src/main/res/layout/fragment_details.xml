@@ -56,6 +56,19 @@
             android:contentDescription="@string/web_url_button"
             android:src="@drawable/web_url" />
 
+        <ToggleButton
+            android:id="@+id/read_me_later_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="4dp"
+            android:layout_marginTop="2dp"
+            android:checked="false"
+            android:text="ToggleButton"
+            android:textOff="Read Me Later"
+            android:textOn="Saved" />
+
     </RelativeLayout>
 
 </ScrollView>

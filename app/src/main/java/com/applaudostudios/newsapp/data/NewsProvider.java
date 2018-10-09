@@ -30,11 +30,6 @@ public class NewsProvider extends ContentProvider {
      */
     public static final int NEWS_ID = 101;
 
-//    /**
-//     * URI matcher code for the content URI for the news table
-//     */
-//    public static final int NEWS_CATEGORY = 102;
-
     /**
      * UriMatcher object to match a content URI to a corresponding code.
      * The input passed into the constructor represents the code to return for the root URI.

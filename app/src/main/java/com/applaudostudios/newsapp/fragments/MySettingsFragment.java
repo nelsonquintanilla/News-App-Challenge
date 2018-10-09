@@ -1,5 +1,6 @@
 package com.applaudostudios.newsapp.fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
@@ -10,8 +11,15 @@ import android.support.v7.app.AppCompatDelegate;
 import com.applaudostudios.newsapp.R;
 
 public class MySettingsFragment extends PreferenceFragment {
+    private ThemeChange mThemeChange;
 
     public MySettingsFragment() {
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mThemeChange = (ThemeChange) context;
     }
 
     @Override
@@ -25,16 +33,19 @@ public class MySettingsFragment extends PreferenceFragment {
             @Override
             public boolean onPreferenceChange(Preference preference, Object o) {
                 if(themePreference.isChecked()){
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                    mThemeChange.themeHasChanged(true);
                     themePreference.setChecked(false);
                 }else {
-                    getActivity().setTheme(AppCompatDelegate.MODE_NIGHT_NO);
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                    mThemeChange.themeHasChanged(false);
                     themePreference.setChecked(true);
                 }
                 return false;
             }
         });
+    }
+
+    public interface ThemeChange{
+        void themeHasChanged(boolean variable);
     }
 
 }

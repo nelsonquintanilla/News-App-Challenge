@@ -3,12 +3,13 @@ package com.applaudostudios.newsapp.activities;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AppCompatDelegate;
 import android.view.MenuItem;
 
 import com.applaudostudios.newsapp.R;
 import com.applaudostudios.newsapp.fragments.MySettingsFragment;
 
-public class SettingsActivity extends AppCompatActivity {
+public class SettingsActivity extends AppCompatActivity implements MySettingsFragment.ThemeChange {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -24,6 +25,7 @@ public class SettingsActivity extends AppCompatActivity {
             .replace(android.R.id.content, new MySettingsFragment())
             .commit();
         }
+
     }
 
     // Up button logic
@@ -37,4 +39,14 @@ public class SettingsActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    public void themeHasChanged(boolean variable) {
+        if(variable){
+            getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        } else {
+            getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        }
+    }
+
 }

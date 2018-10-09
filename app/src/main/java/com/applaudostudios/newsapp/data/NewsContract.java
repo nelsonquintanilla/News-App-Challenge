@@ -65,6 +65,11 @@ public final class NewsContract {
         public static final String TABLE_NAME = "news";
 
         /**
+         * Name of database table for the saved news
+         */
+        public static final String TABLE2_NAME = "saved_news";
+
+        /**
          * Unique ID number for the pet (only for use in the database table).
          *
          * Type: INTEGER
@@ -108,15 +113,6 @@ public final class NewsContract {
          * Type: TEXT
          */
         public static final String COLUMN_NEWS_WEB_URL = "web_url";
-
-//        /**
-//         * Possible values for the category of the news.
-//         */
-//        public static final int CATEGORY_SPORTS = 0;
-//        public static final int CATEGORY_POLITICS = 1;
-//        public static final int CATEGORY_BUSINESS = 3;
-//        public static final int CATEGORY_TECH = 4;
-//        public static final int CATEGORY_WORLD = 5;
 
     }
 

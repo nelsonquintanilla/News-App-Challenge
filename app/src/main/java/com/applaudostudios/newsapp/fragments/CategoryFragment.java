@@ -64,10 +64,6 @@ public class CategoryFragment extends Fragment implements RecyclerViewAdapter.Ca
         setHasOptionsMenu(true);
     }
 
-//    public void dataIsAvailable(List<News> data){
-//        mData = data;
-//    }
-
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -91,20 +87,20 @@ public class CategoryFragment extends Fragment implements RecyclerViewAdapter.Ca
             loaderManager.restartLoader(NEWS_LOADER_ID, null, this);
 
         } else {
-            // Otherwise, displays error
-            // First, hides loading indicator so error message will be visible
-            if(mData == null){
-                View loadingIndicator = mView.findViewById(R.id.loading_indicator);
-                loadingIndicator.setVisibility(View.GONE);
-                // Updates empty state with no connection error message
-                mEmptyStateTextView.setText(R.string.no_internet_connection);
-
-            } else {
+//            // Otherwise, displays error
+//            // First, hides loading indicator so error message will be visible
+//            if(mData == null){
+//                View loadingIndicator = mView.findViewById(R.id.loading_indicator);
+//                loadingIndicator.setVisibility(View.GONE);
+//                // Updates empty state with no connection error message
+//                mEmptyStateTextView.setText(R.string.no_internet_connection);
+//
+//            } else {
                 View loadingIndicator = mView.findViewById(R.id.loading_indicator);
                 loadingIndicator.setVisibility(View.GONE);
                 loaderManager = getLoaderManager();
                 loaderManager.initLoader(CURSOR_LOADER_ID, null, this);
-            }
+//            }
         }
 
         // Declares and initializes the recyclerView object
@@ -224,6 +220,5 @@ public class CategoryFragment extends Fragment implements RecyclerViewAdapter.Ca
     public void onItemClick(int position) {
         startActivity(DetailsActivity.putNews(getContext(), mData.get(position)));
     }
-
 
 }
