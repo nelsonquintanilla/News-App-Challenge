@@ -107,6 +107,7 @@ public class ReadMeLaterFragment extends Fragment implements RecyclerViewAdapter
             // Loop through the table rows.
             do{
                 News news = new News("", "", "", "","", "");
+                news.setNewsId( mCursor.getString(mCursor.getColumnIndex(SavedNewsEntry.COLUMN_NEWS_ID)) );
                 news.setHeadline( mCursor.getString(mCursor.getColumnIndex(SavedNewsEntry.COLUMN_NEWS_HEADLINE)) );
                 news.setBodyText( mCursor.getString(mCursor.getColumnIndex(SavedNewsEntry.COLUMN_NEWS_BODY_TEXT)) );
                 news.setThumbnail( mCursor.getString(mCursor.getColumnIndex(SavedNewsEntry.COLUMN_NEWS_THUMBNAIL)) );
