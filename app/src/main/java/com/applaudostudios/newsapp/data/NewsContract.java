@@ -123,14 +123,14 @@ public final class NewsContract {
          */
         public static final Uri CONTENT_URI = Uri.withAppendedPath(BASE_CONTENT_URI, PATH_SAVED_NEWS);
 
-        /**
-         * The MIME type of the CONTENT_URI for a list of news.
-         */
-        public static final String CONTENT_LIST_TYPE =
-                ContentResolver.CURSOR_DIR_BASE_TYPE
-                        + "/"
-                        + CONTENT_AUTHORITY
-                        + PATH_SAVED_NEWS;
+//        /**
+//         * The MIME type of the CONTENT_URI for a list of news.
+//         */
+//        public static final String CONTENT_LIST_TYPE =
+//                ContentResolver.CURSOR_DIR_BASE_TYPE
+//                        + "/"
+//                        + CONTENT_AUTHORITY
+//                        + PATH_SAVED_NEWS;
 
         /**
          * The MIME type of the CONTENT_URI for a single news.

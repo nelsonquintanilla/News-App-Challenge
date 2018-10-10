@@ -216,12 +216,25 @@ public class DetailsFragment extends Fragment implements LoaderManager.LoaderCal
         Uri newUri = getContext().getContentResolver().insert(SavedNewsEntry.CONTENT_URI, values);
     }
 
+    public void deleteNews() {
+//        ContentValues values = new ContentValues();
+//        values.put(SavedNewsEntry.COLUMN_NEWS_ID, mNewsDetails.getNewsId());
+//        values.put(SavedNewsEntry.COLUMN_NEWS_HEADLINE, mNewsDetails.getHeadline());
+//        values.put(SavedNewsEntry.COLUMN_NEWS_BODY_TEXT, mNewsDetails.getBodyText());
+//        values.put(SavedNewsEntry.COLUMN_NEWS_THUMBNAIL, mNewsDetails.getThumbnail());
+//        values.put(SavedNewsEntry.COLUMN_NEWS_WEB_URL, mNewsDetails.getWebUrl());
+
+        // returning the content URI.
+//        getContext().getContentResolver().delete(SavedNewsEntry.CONTENT_URI, null, null);
+        getContext().getContentResolver().delete(SavedNewsEntry.CONTENT_URI,SavedNewsEntry.COLUMN_NEWS_ID + "=?", new String[] {(getArguments()).getString("someId")});
+    }
+
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         if (isChecked) {
             insertNews();
         } else {
-            // The toggle is disabled
+            deleteNews();
         }
     }
 

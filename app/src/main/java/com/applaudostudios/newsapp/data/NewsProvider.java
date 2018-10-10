@@ -36,10 +36,10 @@ public class NewsProvider extends ContentProvider {
      */
     public static final int SAVED_NEWS = 200;
 
-    /**
-     * URI matcher code for the content URI for a single news in the saved news table
-     */
-    public static final int SAVED_NEWS_ID = 201;
+//    /**
+//     * URI matcher code for the content URI for a single news in the saved news table
+//     */
+//    public static final int SAVED_NEWS_ID = 201;
 
     /**
      * UriMatcher object to match a content URI to a corresponding code.
@@ -56,7 +56,7 @@ public class NewsProvider extends ContentProvider {
         // This URI is used to provide access to ONE single row of the news table.
         sUriMatcher.addURI(NewsContract.CONTENT_AUTHORITY, NewsContract.PATH_NEWS + "/#", NEWS_ID);
 
-        // This URI is used to provide access to MULTIPLE rows of the saved news table.
+        // This URI is used to provide access to ONE row of the saved news table.
         sUriMatcher.addURI(NewsContract.CONTENT_AUTHORITY, NewsContract.PATH_SAVED_NEWS, SAVED_NEWS);
 
 //        // This URI is used to provide access to ONE single row of the saved news table.
@@ -184,6 +184,9 @@ public class NewsProvider extends ContentProvider {
                 selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
                 return db.delete(NewsEntry.TABLE_NAME, selection, selectionArgs);
 
+            case SAVED_NEWS:
+                return db.delete(SavedNewsEntry.TABLE2_NAME, selection, selectionArgs);
+
             default:
                 throw new IllegalArgumentException("Deletion is not supported for " + uri);
         }
@@ -202,8 +205,6 @@ public class NewsProvider extends ContentProvider {
             case NEWS_ID:
                 return NewsEntry.CONTENT_ITEM_TYPE;
             case SAVED_NEWS:
-                return SavedNewsEntry.CONTENT_LIST_TYPE;
-            case SAVED_NEWS_ID:
                 return SavedNewsEntry.CONTENT_ITEM_TYPE;
             default:
                 throw new IllegalStateException("Unknown URI " + uri + " with match " + match);
