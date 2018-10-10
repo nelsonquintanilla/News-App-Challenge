@@ -1,4 +1,4 @@
-package com.applaudostudios.newsapp.fragments;
+package com.applaudostudios.newsapp.fragment;
 
 import android.content.ContentValues;
 import android.content.Intent;
@@ -21,7 +21,7 @@ import android.widget.TextView;
 import android.widget.ToggleButton;
 
 import com.applaudostudios.newsapp.R;
-import com.applaudostudios.newsapp.loaders.ThumbnailLoader;
+import com.applaudostudios.newsapp.loader.ThumbnailLoader;
 import com.applaudostudios.newsapp.model.News;
 import com.applaudostudios.newsapp.data.NewsContract.SavedNewsEntry;
 

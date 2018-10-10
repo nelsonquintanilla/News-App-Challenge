@@ -1,4 +1,4 @@
-package com.applaudostudios.newsapp.fragments;
+package com.applaudostudios.newsapp.fragment;
 
 import android.database.Cursor;
 import android.os.Bundle;
@@ -15,8 +15,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.applaudostudios.newsapp.R;
-import com.applaudostudios.newsapp.activities.DetailsActivity;
-import com.applaudostudios.newsapp.adapters.RecyclerViewAdapter;
+import com.applaudostudios.newsapp.activity.DetailsActivity;
+import com.applaudostudios.newsapp.adapter.RecyclerViewAdapter;
 import com.applaudostudios.newsapp.model.News;
 import com.applaudostudios.newsapp.data.NewsContract.SavedNewsEntry;
 

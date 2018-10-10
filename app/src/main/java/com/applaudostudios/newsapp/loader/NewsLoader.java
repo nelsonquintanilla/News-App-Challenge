@@ -1,10 +1,10 @@
-package com.applaudostudios.newsapp.loaders;
+package com.applaudostudios.newsapp.loader;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.support.v4.content.AsyncTaskLoader;
 
-import com.applaudostudios.newsapp.utils.QueryUtils;
+import com.applaudostudios.newsapp.util.QueryUtils;
 import com.applaudostudios.newsapp.model.News;
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.applaudostudios.newsapp.activities;
+package com.applaudostudios.newsapp.activity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,7 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.applaudostudios.newsapp.R;
-import com.applaudostudios.newsapp.fragments.CategoryFragment;
+import com.applaudostudios.newsapp.fragment.CategoryFragment;
 
 /**
  * Activity to create an instance of CategoryFragment and shows the search results.

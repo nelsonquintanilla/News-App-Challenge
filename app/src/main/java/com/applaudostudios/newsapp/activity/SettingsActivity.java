@@ -1,4 +1,4 @@
-package com.applaudostudios.newsapp.activities;
+package com.applaudostudios.newsapp.activity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -7,7 +7,7 @@ import android.support.v7.app.AppCompatDelegate;
 import android.view.MenuItem;
 
 import com.applaudostudios.newsapp.R;
-import com.applaudostudios.newsapp.fragments.MySettingsFragment;
+import com.applaudostudios.newsapp.fragment.MySettingsFragment;
 
 public class SettingsActivity extends AppCompatActivity implements MySettingsFragment.ThemeChange {
 

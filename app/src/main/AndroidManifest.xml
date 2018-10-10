@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".activities.MainActivity" >
+        <activity android:name=".activity.MainActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,14 +22,14 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".activities.DetailsActivity" />
+        <activity android:name=".activity.DetailsActivity" />
 
-        <activity android:name=".activities.SearchableActivity" />
+        <activity android:name=".activity.SearchableActivity" />
 
-        <activity android:name=".activities.SettingsActivity"
+        <activity android:name=".activity.SettingsActivity"
             android:label="Settings"/>
 
-        <activity android:name=".activities.ReadMeActivity"
+        <activity android:name=".activity.ReadMeActivity"
             android:label="Read Me Later List"
             android:launchMode="standard"/>
 

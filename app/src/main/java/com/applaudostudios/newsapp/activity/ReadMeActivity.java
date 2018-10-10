@@ -1,7 +1,5 @@
-package com.applaudostudios.newsapp.activities;
+package com.applaudostudios.newsapp.activity;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
@@ -10,30 +8,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
 import com.applaudostudios.newsapp.R;
-import com.applaudostudios.newsapp.fragments.DetailsFragment;
-import com.applaudostudios.newsapp.model.News;
+import com.applaudostudios.newsapp.fragment.ReadMeLaterFragment;
 
-public class DetailsActivity extends AppCompatActivity {
-    private static final String EXTRA_DETAIL = "EXTRA_DETAIL";
-
-    // Makes the intent to start the details activity and pass in the details of the news clicked.
-    public static Intent putNews(Context context, News news) {
-        Intent intent = new Intent(context, DetailsActivity.class);
-        intent.putExtra(EXTRA_DETAIL, news);
-        return intent;
-    }
+public class ReadMeActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
 
-        // Getting the details of the news clicked.
-        News mNews = getIntent().getParcelableExtra(EXTRA_DETAIL);
-
         // Creates a new instance of the details fragment and pass in the news details to show them
         // in there.
-        DetailsFragment fragment = DetailsFragment.newInstance(mNews, mNews.getThumbnail(), mNews.getNewsId());
+        ReadMeLaterFragment fragment = new ReadMeLaterFragment();
 
         // To communicate between this activity and the fragment created above.
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -47,6 +33,7 @@ public class DetailsActivity extends AppCompatActivity {
         }
     }
 
+
     // Up button logic
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -58,5 +45,4 @@ public class DetailsActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
 }

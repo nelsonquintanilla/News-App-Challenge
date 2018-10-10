@@ -11,4 +11,8 @@
     <string name="news_headline">Headline</string>
     <string name="search">Search</string>
     <string name="theme_switch">theme_switch</string>
+    <string name="settings_title">Settings</string>
+    <string name="toggle_button">ToggleButton</string>
+    <string name="read_me_later_text_off">Read Me Later</string>
+    <string name="saved_text_on">Saved</string>
 </resources>

@@ -1,4 +1,4 @@
-package com.applaudostudios.newsapp.fragments;
+package com.applaudostudios.newsapp.fragment;
 
 import android.content.Context;
 import android.os.Bundle;

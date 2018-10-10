@@ -65,9 +65,9 @@
             android:layout_marginEnd="4dp"
             android:layout_marginTop="2dp"
             android:checked="false"
-            android:text="ToggleButton"
-            android:textOff="Read Me Later"
-            android:textOn="Saved" />
+            android:text="@string/toggle_button"
+            android:textOff="@string/read_me_later_text_off"
+            android:textOn="@string/saved_text_on" />
 
     </RelativeLayout>
 

@@ -1,4 +1,4 @@
-package com.applaudostudios.newsapp.loaders;
+package com.applaudostudios.newsapp.loader;
 
 import android.content.Context;
 import android.graphics.Bitmap;

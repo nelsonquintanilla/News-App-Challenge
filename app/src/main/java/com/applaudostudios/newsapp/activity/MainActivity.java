@@ -1,4 +1,4 @@
-package com.applaudostudios.newsapp.activities;
+package com.applaudostudios.newsapp.activity;
 
 
 import android.content.Intent;
@@ -13,7 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.applaudostudios.newsapp.R;
-import com.applaudostudios.newsapp.adapters.FragmentPagerAdapter;
+import com.applaudostudios.newsapp.adapter.FragmentPagerAdapter;
 
 
 public class MainActivity extends AppCompatActivity {

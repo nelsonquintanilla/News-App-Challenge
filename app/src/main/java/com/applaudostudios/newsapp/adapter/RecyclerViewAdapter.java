@@ -1,4 +1,4 @@
-package com.applaudostudios.newsapp.adapters;
+package com.applaudostudios.newsapp.adapter;
 
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;

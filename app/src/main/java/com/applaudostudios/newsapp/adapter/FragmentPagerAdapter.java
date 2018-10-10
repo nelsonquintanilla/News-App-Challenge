@@ -1,11 +1,11 @@
-package com.applaudostudios.newsapp.adapters;
+package com.applaudostudios.newsapp.adapter;
 
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.applaudostudios.newsapp.fragments.CategoryFragment;
+import com.applaudostudios.newsapp.fragment.CategoryFragment;
 
 public class FragmentPagerAdapter extends FragmentStatePagerAdapter {
 

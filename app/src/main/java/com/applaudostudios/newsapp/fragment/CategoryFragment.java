@@ -1,4 +1,4 @@
-package com.applaudostudios.newsapp.fragments;
+package com.applaudostudios.newsapp.fragment;
 
 import android.content.Context;
 import android.content.Intent;
@@ -20,11 +20,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.applaudostudios.newsapp.R;
-import com.applaudostudios.newsapp.activities.DetailsActivity;
-import com.applaudostudios.newsapp.activities.ReadMeActivity;
-import com.applaudostudios.newsapp.adapters.RecyclerViewAdapter;
+import com.applaudostudios.newsapp.activity.DetailsActivity;
+import com.applaudostudios.newsapp.activity.ReadMeActivity;
+import com.applaudostudios.newsapp.adapter.RecyclerViewAdapter;
 import com.applaudostudios.newsapp.data.NewsContract.NewsEntry;
-import com.applaudostudios.newsapp.loaders.NewsLoader;
+import com.applaudostudios.newsapp.loader.NewsLoader;
 import com.applaudostudios.newsapp.model.News;
 
 import java.util.ArrayList;
