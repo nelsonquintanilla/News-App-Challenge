@@ -30,7 +30,8 @@
             android:label="Settings"/>
 
         <activity android:name=".activities.ReadMeActivity"
-            android:label="Read Me Later List" />
+            android:label="Read Me Later List"
+            android:launchMode="standard"/>
 
         <provider
             android:authorities="com.applaudostudios.newsapp"

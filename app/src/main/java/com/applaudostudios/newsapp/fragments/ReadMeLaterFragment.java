@@ -1,5 +1,6 @@
 package com.applaudostudios.newsapp.fragments;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -86,6 +87,12 @@ public class ReadMeLaterFragment extends Fragment implements RecyclerViewAdapter
                     null);
         }
         return null;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getLoaderManager().restartLoader(CURSOR_LOADER_ID, null, this);
     }
 
     @Override
