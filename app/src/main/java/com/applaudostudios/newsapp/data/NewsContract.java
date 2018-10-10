@@ -23,7 +23,7 @@ public final class NewsContract {
     /**
      * shared by every URI associated with NewsContract.
      */
-    public static final Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
+    static final Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
 
     /**
      * Stores the path for the news table which will be appended to the base content URI.
@@ -129,15 +129,6 @@ public final class NewsContract {
          * The content URI to access the news data in the provider
          */
         public static final Uri CONTENT_URI = Uri.withAppendedPath(BASE_CONTENT_URI, PATH_SAVED_NEWS);
-
-//        /**
-//         * The MIME type of the CONTENT_URI for a list of news.
-//         */
-//        public static final String CONTENT_LIST_TYPE =
-//                ContentResolver.CURSOR_DIR_BASE_TYPE
-//                        + "/"
-//                        + CONTENT_AUTHORITY
-//                        + PATH_SAVED_NEWS;
 
         /**
          * The MIME type of the CONTENT_URI for a single news.

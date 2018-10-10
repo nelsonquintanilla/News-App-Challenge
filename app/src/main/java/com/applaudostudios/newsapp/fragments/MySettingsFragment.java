@@ -6,7 +6,6 @@ import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.SwitchPreference;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatDelegate;
 
 import com.applaudostudios.newsapp.R;
 
@@ -28,7 +27,9 @@ public class MySettingsFragment extends PreferenceFragment {
         // Load the preferences from an XML resource
         addPreferencesFromResource(R.xml.pref_general);
 
-        final SwitchPreference themePreference = (SwitchPreference) findPreference(this.getResources().getString(R.string.theme_switch));
+        final SwitchPreference themePreference = (SwitchPreference) findPreference(
+                this.getResources().getString(R.string.theme_switch));
+
         themePreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
             public boolean onPreferenceChange(Preference preference, Object o) {

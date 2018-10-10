@@ -36,11 +36,6 @@ public class NewsProvider extends ContentProvider {
      */
     public static final int SAVED_NEWS = 200;
 
-//    /**
-//     * URI matcher code for the content URI for a single news in the saved news table
-//     */
-//    public static final int SAVED_NEWS_ID = 201;
-
     /**
      * UriMatcher object to match a content URI to a corresponding code.
      * The input passed into the constructor represents the code to return for the root URI.
@@ -58,9 +53,6 @@ public class NewsProvider extends ContentProvider {
 
         // This URI is used to provide access to ONE row of the saved news table.
         sUriMatcher.addURI(NewsContract.CONTENT_AUTHORITY, NewsContract.PATH_SAVED_NEWS, SAVED_NEWS);
-
-//        // This URI is used to provide access to ONE single row of the saved news table.
-//        sUriMatcher.addURI(NewsContract.CONTENT_AUTHORITY, NewsContract.PATH_SAVED_NEWS, SAVED_NEWS_ID);
     }
 
     /**
@@ -150,22 +142,6 @@ public class NewsProvider extends ContentProvider {
             @Nullable ContentValues contentValues,
             @Nullable String selection,
             @Nullable String[] selectionArgs) {
-//
-//        SQLiteDatabase db = mDbHelper.getWritableDatabase();
-//
-//        int match = sUriMatcher.match(uri);
-//        switch (match) {
-//            case NEWS:
-//                return db.update(NewsEntry.TABLE_NAME, contentValues, selection, selectionArgs);
-//
-//            case NEWS_ID:
-//                selection = NewsEntry._ID + "=?";
-//                selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
-//                return db.update(NewsEntry.TABLE_NAME, contentValues, selection, selectionArgs);
-//
-//            default:
-//                throw new IllegalArgumentException("Update is not supported for " + uri);
-//        }
         return 0;
     }
 

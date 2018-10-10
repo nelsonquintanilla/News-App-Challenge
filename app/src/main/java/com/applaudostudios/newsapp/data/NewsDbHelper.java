@@ -23,7 +23,7 @@ public class NewsDbHelper extends SQLiteOpenHelper {
      *
      * @param context of the app
      */
-    public NewsDbHelper(Context context) {
+    NewsDbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 

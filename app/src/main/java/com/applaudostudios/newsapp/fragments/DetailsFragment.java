@@ -25,9 +25,6 @@ import com.applaudostudios.newsapp.loaders.ThumbnailLoader;
 import com.applaudostudios.newsapp.model.News;
 import com.applaudostudios.newsapp.data.NewsContract.SavedNewsEntry;
 
-
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 /**
@@ -201,7 +198,7 @@ public class DetailsFragment extends Fragment implements LoaderManager.LoaderCal
         values.put(SavedNewsEntry.COLUMN_NEWS_WEB_URL, mNewsDetails.getWebUrl());
 
         // returning the content URI.
-        Uri newUri = getContext().getContentResolver().insert(SavedNewsEntry.CONTENT_URI, values);
+        getContext().getContentResolver().insert(SavedNewsEntry.CONTENT_URI, values);
     }
 
     public void deleteNews() {

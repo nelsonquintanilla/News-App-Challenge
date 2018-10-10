@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.applaudostudios.newsapp.R;
-import com.applaudostudios.newsapp.fragments.CategoryFragment;
 import com.applaudostudios.newsapp.model.News;
 
 import java.util.ArrayList;
