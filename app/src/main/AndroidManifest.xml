@@ -29,7 +29,8 @@
         <activity android:name=".activities.SettingsActivity"
             android:label="Settings"/>
 
-        <activity android:name=".activities.ReadMeActivity" />
+        <activity android:name=".activities.ReadMeActivity"
+            android:label="Read Me Later List"/>
 
         <provider
             android:authorities="com.applaudostudios.newsapp"

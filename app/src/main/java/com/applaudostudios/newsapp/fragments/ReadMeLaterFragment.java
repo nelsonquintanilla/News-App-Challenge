@@ -49,7 +49,7 @@ public class ReadMeLaterFragment extends Fragment implements RecyclerViewAdapter
         View mView = inflater.inflate(R.layout.fragment_read_me, container, false);
 
         // Declares and initializes the recyclerView object
-        RecyclerView myRecyclerView = mView.findViewById(R.id.recycler_view_news);
+        RecyclerView myRecyclerView = mView.findViewById(R.id.recycler_view_read_me);
         myRecyclerView.setHasFixedSize(true);
         // Sets up the adapter
         mRecyclerViewAdapter = new RecyclerViewAdapter(this);

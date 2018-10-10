@@ -1,12 +1,14 @@
 package com.applaudostudios.newsapp.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
@@ -20,6 +22,7 @@ import android.widget.TextView;
 
 import com.applaudostudios.newsapp.R;
 import com.applaudostudios.newsapp.activities.DetailsActivity;
+import com.applaudostudios.newsapp.activities.ReadMeActivity;
 import com.applaudostudios.newsapp.adapters.RecyclerViewAdapter;
 import com.applaudostudios.newsapp.data.NewsContract.NewsEntry;
 import com.applaudostudios.newsapp.loaders.NewsLoader;
@@ -70,6 +73,17 @@ public class CategoryFragment extends Fragment implements RecyclerViewAdapter.Ca
         View mView = inflater.inflate(R.layout.fragment_category, container, false);
 //        // Inflates the layout for this fragment
 //        TextView mEmptyStateTextView = mView.findViewById(R.id.empty_view);
+
+        // Setup FAB to open EditorActivity
+        FloatingActionButton fab = mView.findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), ReadMeActivity.class);
+                startActivity(intent);
+            }
+        });
+
         // Checks the status of the network connection
         ConnectivityManager connMgr = (ConnectivityManager)
                 (getActivity()).getSystemService(Context.CONNECTIVITY_SERVICE);
