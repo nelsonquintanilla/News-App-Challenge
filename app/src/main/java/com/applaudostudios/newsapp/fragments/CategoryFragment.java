@@ -141,6 +141,7 @@ public class CategoryFragment extends Fragment implements RecyclerViewAdapter.Ca
                 // Define a projection that specifies the columns from the table we care about.
                 String[] projection = {
                         NewsEntry._ID,
+                        NewsEntry.COLUMN_NEWS_ID,
                         NewsEntry.COLUMN_NEWS_CATEGORY,
                         NewsEntry.COLUMN_NEWS_HEADLINE,
                         NewsEntry.COLUMN_NEWS_BODY_TEXT,
