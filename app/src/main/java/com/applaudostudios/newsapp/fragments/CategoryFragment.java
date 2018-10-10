@@ -68,8 +68,8 @@ public class CategoryFragment extends Fragment implements RecyclerViewAdapter.Ca
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View mView = inflater.inflate(R.layout.fragment_category, container, false);
-        // Inflates the layout for this fragment
-        TextView mEmptyStateTextView = mView.findViewById(R.id.empty_view);
+//        // Inflates the layout for this fragment
+//        TextView mEmptyStateTextView = mView.findViewById(R.id.empty_view);
         // Checks the status of the network connection
         ConnectivityManager connMgr = (ConnectivityManager)
                 (getActivity()).getSystemService(Context.CONNECTIVITY_SERVICE);

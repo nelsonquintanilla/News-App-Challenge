@@ -178,18 +178,6 @@ public class DetailsFragment extends Fragment implements LoaderManager.LoaderCal
     }
 
 
-//    @Override
-//    public void onLoadFinished(@NonNull Loader<Bitmap> loader, Bitmap data) {
-//        mThumbnail.setImageBitmap(data);
-//        mThumbnail.setVisibility(View.VISIBLE);
-//    }
-//
-//    @Override
-//    public void onLoaderReset(@NonNull Loader<Bitmap> loader) {
-//        // Empty.
-//    }
-
-
     // Makes the intent to open the url in a browser when the webUrl image is clicked.
     @Override
     public void onClick(View view) {
@@ -217,16 +205,11 @@ public class DetailsFragment extends Fragment implements LoaderManager.LoaderCal
     }
 
     public void deleteNews() {
-//        ContentValues values = new ContentValues();
-//        values.put(SavedNewsEntry.COLUMN_NEWS_ID, mNewsDetails.getNewsId());
-//        values.put(SavedNewsEntry.COLUMN_NEWS_HEADLINE, mNewsDetails.getHeadline());
-//        values.put(SavedNewsEntry.COLUMN_NEWS_BODY_TEXT, mNewsDetails.getBodyText());
-//        values.put(SavedNewsEntry.COLUMN_NEWS_THUMBNAIL, mNewsDetails.getThumbnail());
-//        values.put(SavedNewsEntry.COLUMN_NEWS_WEB_URL, mNewsDetails.getWebUrl());
-
         // returning the content URI.
-//        getContext().getContentResolver().delete(SavedNewsEntry.CONTENT_URI, null, null);
-        getContext().getContentResolver().delete(SavedNewsEntry.CONTENT_URI,SavedNewsEntry.COLUMN_NEWS_ID + "=?", new String[] {(getArguments()).getString("someId")});
+        getContext().getContentResolver().delete(
+                SavedNewsEntry.CONTENT_URI,
+                SavedNewsEntry.COLUMN_NEWS_ID + "=?",
+                new String[] {(getArguments()).getString("someId")});
     }
 
     @Override

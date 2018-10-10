@@ -29,6 +29,8 @@
         <activity android:name=".activities.SettingsActivity"
             android:label="Settings"/>
 
+        <activity android:name=".activities.ReadMeActivity" />
+
         <provider
             android:authorities="com.applaudostudios.newsapp"
             android:name=".data.NewsProvider"
