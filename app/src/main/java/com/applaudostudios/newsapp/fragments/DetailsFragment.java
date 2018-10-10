@@ -215,6 +215,7 @@ public class DetailsFragment extends Fragment implements LoaderManager.LoaderCal
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         if (isChecked) {
+            if(!mVariable)
             insertNews();
         } else {
             deleteNews();

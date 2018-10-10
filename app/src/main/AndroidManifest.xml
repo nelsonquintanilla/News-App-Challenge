@@ -30,7 +30,7 @@
             android:label="Settings"/>
 
         <activity android:name=".activities.ReadMeActivity"
-            android:label="Read Me Later List"/>
+            android:label="Read Me Later List" />
 
         <provider
             android:authorities="com.applaudostudios.newsapp"

@@ -87,6 +87,13 @@ public final class NewsContract {
         public static final String COLUMN_NEWS_CATEGORY = "category";
 
         /**
+         * id of the news.
+         *
+         * Type: TEXT
+         */
+        public static final String COLUMN_NEWS_ID = "id";
+
+        /**
          * Headline of the news.
          *
          * Type: TEXT

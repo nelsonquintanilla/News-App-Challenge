@@ -48,6 +48,7 @@ public class NewsLoader extends AsyncTaskLoader<List<News>> {
             // Create a ContentValues object where column names are the keys,
             // and news attributes extracted from the JSON are the values.
             ContentValues values = new ContentValues();
+            values.put(NewsEntry.COLUMN_NEWS_ID, news.getNewsId());
             values.put(NewsEntry.COLUMN_NEWS_HEADLINE, news.getHeadline());
             values.put(NewsEntry.COLUMN_NEWS_CATEGORY, mCategory);
             values.put(NewsEntry.COLUMN_NEWS_BODY_TEXT, news.getBodyText());
