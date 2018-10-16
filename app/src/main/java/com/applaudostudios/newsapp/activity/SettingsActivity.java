@@ -16,6 +16,7 @@ public class SettingsActivity extends AppCompatActivity implements MySettingsFra
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         boolean themeSettings = prefs.getBoolean(KEY_THEME_SWITCH, false);
         if (themeSettings) {
@@ -23,8 +24,6 @@ public class SettingsActivity extends AppCompatActivity implements MySettingsFra
         } else {
             getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         }
-
-        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
         // Sets the up button

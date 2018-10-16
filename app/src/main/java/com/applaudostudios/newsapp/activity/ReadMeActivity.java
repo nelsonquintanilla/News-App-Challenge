@@ -18,6 +18,13 @@ public class ReadMeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        boolean themeSettings = prefs.getBoolean(SettingsActivity.KEY_THEME_SWITCH, false);
+        if (themeSettings) {
+            getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        } else {
+            getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
         setContentView(R.layout.activity_details);
 
         // Creates a new instance of the fragment.
@@ -32,18 +39,6 @@ public class ReadMeActivity extends AppCompatActivity {
         // Sets the up button
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        }
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        boolean themeSettings = prefs.getBoolean(SettingsActivity.KEY_THEME_SWITCH, false);
-        if (themeSettings) {
-            getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-        } else {
-            getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         }
     }
 
