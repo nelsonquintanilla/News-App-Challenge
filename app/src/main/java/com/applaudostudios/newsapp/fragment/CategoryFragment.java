@@ -40,7 +40,8 @@ public class CategoryFragment extends Fragment implements RecyclerViewAdapter.Ca
     public static final int CURSOR_LOADER_ID = 1;
     private RecyclerViewAdapter recyclerViewAdapter;
     private Cursor mCursor;
-
+    public static final String KEY_URL = "someUrl";
+    public static final String KEY_CATEGORY ="someCategory";
     public CategoryFragment() {
         // Required empty public constructor
     }
@@ -54,8 +55,8 @@ public class CategoryFragment extends Fragment implements RecyclerViewAdapter.Ca
     public static CategoryFragment newInstance(String url, String category) {
         CategoryFragment categoryFragment = new CategoryFragment();
         Bundle args = new Bundle();
-        args.putString("someUrl", url);
-        args.putString("someCategory", category);
+        args.putString(KEY_URL, url);
+        args.putString(KEY_CATEGORY, category);
         categoryFragment.setArguments(args);
         return categoryFragment;
     }
@@ -122,8 +123,8 @@ public class CategoryFragment extends Fragment implements RecyclerViewAdapter.Ca
     public Loader onCreateLoader(int id, @Nullable Bundle args) {
         switch (id) {
             case NEWS_LOADER_ID:
-                return new NewsLoader(getActivity(), (getArguments()).getString("someUrl"),
-                        (getArguments()).getString("someCategory"));
+                return new NewsLoader(getActivity(), (getArguments()).getString(KEY_URL),
+                        (getArguments()).getString(KEY_CATEGORY));
 
             case CURSOR_LOADER_ID:
                 // Define a projection that specifies the columns from the table we care about.
@@ -147,7 +148,7 @@ public class CategoryFragment extends Fragment implements RecyclerViewAdapter.Ca
                             // No selection clause
                             NewsEntry.COLUMN_NEWS_CATEGORY + "=?",
                             // No selection arguments
-                            new String[]{(getArguments()).getString("someCategory")},
+                            new String[]{(getArguments()).getString(KEY_CATEGORY)},
                             // Default sort order
                             null);
                 }

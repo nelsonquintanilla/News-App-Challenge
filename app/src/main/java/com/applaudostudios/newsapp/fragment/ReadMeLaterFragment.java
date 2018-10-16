@@ -72,8 +72,8 @@ public class ReadMeLaterFragment extends Fragment implements RecyclerViewAdapter
 
         // This loader will execute the ContentProvider's query method on a background thread
         // Parent activity context
-        if(getContext()!=null){
-            return new CursorLoader( getContext(),
+        if (getContext() != null) {
+            return new CursorLoader(getContext(),
                     // Provider content URI to query
                     SavedNewsEntry.CONTENT_URI,
                     // Columns to include in the resulting Cursor
@@ -103,21 +103,21 @@ public class ReadMeLaterFragment extends Fragment implements RecyclerViewAdapter
         mData = dataExtracted;
     }
 
-    public List<News> getCursorData(Object data){
+    public List<News> getCursorData(Object data) {
         mCursor = (Cursor) data;
         List<News> newsList = new ArrayList<>();
         newsList.clear();
 
         // If table has rows.
-        if(mCursor.moveToFirst()){
+        if (mCursor.moveToFirst()) {
             // Loop through the table rows.
-            do{
-                News news = new News("", "", "", "","", "");
-                news.setNewsId( mCursor.getString(mCursor.getColumnIndex(SavedNewsEntry.COLUMN_NEWS_ID)) );
-                news.setHeadline( mCursor.getString(mCursor.getColumnIndex(SavedNewsEntry.COLUMN_NEWS_HEADLINE)) );
-                news.setBodyText( mCursor.getString(mCursor.getColumnIndex(SavedNewsEntry.COLUMN_NEWS_BODY_TEXT)) );
-                news.setThumbnail( mCursor.getString(mCursor.getColumnIndex(SavedNewsEntry.COLUMN_NEWS_THUMBNAIL)) );
-                news.setWebUrl( mCursor.getString(mCursor.getColumnIndex(SavedNewsEntry.COLUMN_NEWS_WEB_URL)) );
+            do {
+                News news = new News("", "", "", "", "", "");
+                news.setNewsId(mCursor.getString(mCursor.getColumnIndex(SavedNewsEntry.COLUMN_NEWS_ID)));
+                news.setHeadline(mCursor.getString(mCursor.getColumnIndex(SavedNewsEntry.COLUMN_NEWS_HEADLINE)));
+                news.setBodyText(mCursor.getString(mCursor.getColumnIndex(SavedNewsEntry.COLUMN_NEWS_BODY_TEXT)));
+                news.setThumbnail(mCursor.getString(mCursor.getColumnIndex(SavedNewsEntry.COLUMN_NEWS_THUMBNAIL)));
+                news.setWebUrl(mCursor.getString(mCursor.getColumnIndex(SavedNewsEntry.COLUMN_NEWS_WEB_URL)));
                 newsList.add(news);
             } while (mCursor.moveToNext());
         }

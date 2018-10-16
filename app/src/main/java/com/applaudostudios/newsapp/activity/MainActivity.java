@@ -1,7 +1,7 @@
 package com.applaudostudios.newsapp.activity;
 
-
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.TabLayout;
@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
         if (actionBar != null) {
             actionBar.setElevation(0);
         }
+
     }
 
     // When the searchView is tapped, it creates the Searchable activity to make the search there.
@@ -76,6 +77,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        boolean themeSettings = prefs.getBoolean(SettingsActivity.KEY_THEME_SWITCH, false);
+        if (themeSettings) {
+            getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        } else {
+            getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
     }
 }

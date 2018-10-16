@@ -9,7 +9,6 @@ import com.applaudostudios.newsapp.fragment.CategoryFragment;
 
 public class FragmentPagerAdapter extends FragmentStatePagerAdapter {
 
-    private static int NUM_ITEMS = 5;
     private String[] mTitles = new String[]{"Sports", "Politics", "Business", "Tech", "World"};
 
     public FragmentPagerAdapter(FragmentManager fm) {
@@ -36,7 +35,7 @@ public class FragmentPagerAdapter extends FragmentStatePagerAdapter {
     // Returns the number of pages in the ViewPager
     @Override
     public int getCount() {
-        return NUM_ITEMS;
+        return mTitles.length;
     }
 
     // Returns a string describing each page

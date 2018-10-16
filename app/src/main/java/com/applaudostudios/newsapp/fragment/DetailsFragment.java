@@ -42,6 +42,9 @@ public class DetailsFragment extends Fragment implements LoaderManager.LoaderCal
     private Cursor mCursor;
     private boolean mVariable;
     private ToggleButton readMeLaterButton;
+    public static final String KEY_NEWS = "NEWS_KEY";
+    public static final String KEY_URL = "someUrl";
+    public static final String KEY_ID = "someId";
 
 
     public DetailsFragment() {
@@ -52,9 +55,9 @@ public class DetailsFragment extends Fragment implements LoaderManager.LoaderCal
     // and the details of the news clicked.
     public static DetailsFragment newInstance(News news, String url, String id) {
         Bundle args = new Bundle();
-        args.putParcelable("NEWS_KEY", news);
-        args.putString("someUrl", url);
-        args.putString("someId", id);
+        args.putParcelable(KEY_NEWS, news);
+        args.putString(KEY_URL, url);
+        args.putString(KEY_ID, id);
         DetailsFragment fragment = new DetailsFragment();
         fragment.setArguments(args);
         return fragment;
@@ -63,7 +66,7 @@ public class DetailsFragment extends Fragment implements LoaderManager.LoaderCal
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        News mNews = (getArguments()).getParcelable("NEWS_KEY");
+        News mNews = (getArguments()).getParcelable(KEY_NEWS);
         mNewsDetails = mNews;
         mHeadline = mNews.getHeadline();
         mBodyText = mNews.getBodyText();
@@ -97,10 +100,10 @@ public class DetailsFragment extends Fragment implements LoaderManager.LoaderCal
     @NonNull
     @Override
     public Loader onCreateLoader(int id, @Nullable Bundle args) {
-        switch (id){
+        switch (id) {
             case THUMBNAIL_LOADER_ID:
                 return new ThumbnailLoader(Objects.requireNonNull(getActivity()),
-                        Objects.requireNonNull(getArguments()).getString("someUrl"));
+                        Objects.requireNonNull(getArguments()).getString(KEY_URL));
             case CURSOR_LOADER_ID:
                 // Define a projection that specifies the columns from the table we care about.
                 String[] projection = {
@@ -113,8 +116,8 @@ public class DetailsFragment extends Fragment implements LoaderManager.LoaderCal
 
                 // This loader will execute the ContentProvider's query method on a background thread
                 // Parent activity context
-                if(getContext()!=null){
-                    return new CursorLoader( getContext(),
+                if (getContext() != null) {
+                    return new CursorLoader(getContext(),
                             // Provider content URI to query
                             SavedNewsEntry.CONTENT_URI,
                             // Columns to include in the resulting Cursor
@@ -122,7 +125,7 @@ public class DetailsFragment extends Fragment implements LoaderManager.LoaderCal
                             // No selection clause
                             SavedNewsEntry.COLUMN_NEWS_ID + "=?",
                             // No selection arguments
-                            new String[] {(getArguments()).getString("someId")},
+                            new String[]{(getArguments()).getString(KEY_ID)},
                             // Default sort order
                             null);
                 }
@@ -142,7 +145,7 @@ public class DetailsFragment extends Fragment implements LoaderManager.LoaderCal
 
             case CURSOR_LOADER_ID:
                 mVariable = getCursorData(data);
-                if(mVariable){
+                if (mVariable) {
                     readMeLaterButton.setChecked(true);
                 } else {
                     readMeLaterButton.setChecked(false);
@@ -154,18 +157,15 @@ public class DetailsFragment extends Fragment implements LoaderManager.LoaderCal
         }
     }
 
-    public boolean getCursorData(Object data){
+    public boolean getCursorData(Object data) {
         mCursor = (Cursor) data;
         // If table has rows.
-        if(mCursor.moveToFirst()){
-            return true;
-        }
-        return false;
+        return mCursor.moveToFirst();
     }
 
     @Override
     public void onLoaderReset(@NonNull Loader loader) {
-        switch (loader.getId()){
+        switch (loader.getId()) {
             case CURSOR_LOADER_ID:
                 mCursor.close();
                 break;
@@ -206,14 +206,14 @@ public class DetailsFragment extends Fragment implements LoaderManager.LoaderCal
         getContext().getContentResolver().delete(
                 SavedNewsEntry.CONTENT_URI,
                 SavedNewsEntry.COLUMN_NEWS_ID + "=?",
-                new String[] {(getArguments()).getString("someId")});
+                new String[]{(getArguments()).getString(KEY_ID)});
     }
 
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         if (isChecked) {
-            if(!mVariable)
-            insertNews();
+            if (!mVariable)
+                insertNews();
         } else {
             deleteNews();
         }

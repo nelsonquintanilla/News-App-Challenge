@@ -10,7 +10,9 @@ import com.applaudostudios.newsapp.data.NewsContract.SavedNewsEntry;
 
 public class NewsDbHelper extends SQLiteOpenHelper {
 
-    /** Name of the database file */
+    /**
+     * Name of the database file
+     */
     private static final String DATABASE_NAME = "news.db";
 
     /**
@@ -58,6 +60,6 @@ public class NewsDbHelper extends SQLiteOpenHelper {
      */
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
-    // The database is still at version 1, so there's nothing to do be done here.
+        // The database is still at version 1, so there's nothing to do be done here.
     }
 }

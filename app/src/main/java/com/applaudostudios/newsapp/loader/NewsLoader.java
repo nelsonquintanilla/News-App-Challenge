@@ -8,6 +8,7 @@ import com.applaudostudios.newsapp.util.QueryUtils;
 import com.applaudostudios.newsapp.model.News;
 
 import java.util.List;
+
 import com.applaudostudios.newsapp.data.NewsContract.NewsEntry;
 
 public class NewsLoader extends AsyncTaskLoader<List<News>> {
@@ -41,7 +42,7 @@ public class NewsLoader extends AsyncTaskLoader<List<News>> {
         getContext().getContentResolver().delete(
                 NewsEntry.CONTENT_URI,
                 NewsEntry.COLUMN_NEWS_CATEGORY + "=?",
-                new String[] {mCategory});
+                new String[]{mCategory});
 
         // Inserting list of news in the database.
         for (News news : newsList) {

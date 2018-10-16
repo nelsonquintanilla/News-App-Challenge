@@ -11,6 +11,7 @@ import com.applaudostudios.newsapp.R;
 
 public class MySettingsFragment extends PreferenceFragment {
     private ThemeChange mThemeChange;
+    private SwitchPreference switchPreference;
 
     public MySettingsFragment() {
     }
@@ -27,25 +28,25 @@ public class MySettingsFragment extends PreferenceFragment {
         // Load the preferences from an XML resource
         addPreferencesFromResource(R.xml.pref_general);
 
-        final SwitchPreference themePreference = (SwitchPreference) findPreference(
+        switchPreference = (SwitchPreference) findPreference(
                 this.getResources().getString(R.string.theme_switch));
 
-        themePreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+        switchPreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
             public boolean onPreferenceChange(Preference preference, Object o) {
-                if(themePreference.isChecked()){
+                if (switchPreference.isChecked()) {
                     mThemeChange.themeHasChanged(true);
-                    themePreference.setChecked(false);
-                }else {
+                    switchPreference.setChecked(false);
+                } else {
                     mThemeChange.themeHasChanged(false);
-                    themePreference.setChecked(true);
+                    switchPreference.setChecked(true);
                 }
                 return false;
             }
         });
     }
 
-    public interface ThemeChange{
+    public interface ThemeChange {
         void themeHasChanged(boolean variable);
     }
 
