@@ -17,6 +17,7 @@ public class SettingsActivity extends AppCompatActivity implements MySettingsFra
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Makes the intent to start the details activity and pass in the details of the news clicked.
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         boolean themeSettings = prefs.getBoolean(KEY_THEME_SWITCH, false);
         if (themeSettings) {
@@ -49,6 +50,8 @@ public class SettingsActivity extends AppCompatActivity implements MySettingsFra
         return super.onOptionsItemSelected(item);
     }
 
+    // Defining body for the interface's method. It sets the theme depending in the boolean that is
+    // passed in to it from the MySettingsFragment.
     @Override
     public void themeHasChanged(boolean variable) {
         if (variable) {

@@ -88,6 +88,8 @@ public class ReadMeLaterFragment extends Fragment implements RecyclerViewAdapter
         return null;
     }
 
+    // Restarting the loader each time that we come back to the ReadMeActivity, so it's list it's
+    // updated.
     @Override
     public void onResume() {
         super.onResume();
@@ -129,6 +131,7 @@ public class ReadMeLaterFragment extends Fragment implements RecyclerViewAdapter
         mCursor.close();
     }
 
+    // Starting DetailsActivity when the item is clicked.
     @Override
     public void onItemClick(int position) {
         startActivity(DetailsActivity.putNews(getContext(), mData.get(position)));

@@ -3,6 +3,9 @@ package com.applaudostudios.newsapp.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+/**
+ * News model.
+ */
 public class News implements Parcelable {
 
     private String mHeadline;

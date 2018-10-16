@@ -9,6 +9,10 @@ import android.support.annotation.Nullable;
 
 import com.applaudostudios.newsapp.R;
 
+/**
+ * PreferenceFragment that handles the logic about the preferenceswhen the switch in the settings
+ * is toggled.
+ */
 public class MySettingsFragment extends PreferenceFragment {
     private ThemeChange mThemeChange;
     private SwitchPreference switchPreference;
@@ -35,9 +39,13 @@ public class MySettingsFragment extends PreferenceFragment {
             @Override
             public boolean onPreferenceChange(Preference preference, Object o) {
                 if (switchPreference.isChecked()) {
+                    // If the switch is toggled to it's off state, sets the theme to day/light and
+                    // sets the switch to off.
                     mThemeChange.themeHasChanged(true);
                     switchPreference.setChecked(false);
                 } else {
+                    // If the switch is toggled to it's on state, sets the theme to night/dark and
+                    // sets the switch to on.
                     mThemeChange.themeHasChanged(false);
                     switchPreference.setChecked(true);
                 }

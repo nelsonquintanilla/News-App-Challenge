@@ -18,6 +18,7 @@ public class ReadMeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Getting the SharedPreferences and setting the theme in the activity depending on it.
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         boolean themeSettings = prefs.getBoolean(SettingsActivity.KEY_THEME_SWITCH, false);
         if (themeSettings) {

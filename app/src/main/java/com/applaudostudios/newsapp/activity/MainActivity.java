@@ -74,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
+    // Getting the SharedPreferences and setting the theme in the activity depending on it.
     @Override
     protected void onResume() {
         super.onResume();

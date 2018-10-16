@@ -20,10 +20,14 @@ import com.applaudostudios.newsapp.fragment.CategoryFragment;
  */
 public class SearchableActivity extends AppCompatActivity {
     private CategoryFragment searchFragment;
+    public static final String URL =
+            "https://content.guardianapis.com/search?show-fields=headline%2Cthumbnail%2CbodyText&page=1&page-size=30&q=";
+    public static final String QUERIES = "&api-key=f8bc1c2f-a416-4927-b866-b05b70de8f11";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Getting the SharedPreferences and setting the theme in the activity depending on it.
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         boolean themeSettings = prefs.getBoolean(SettingsActivity.KEY_THEME_SWITCH, false);
         if (themeSettings) {
@@ -60,8 +64,8 @@ public class SearchableActivity extends AppCompatActivity {
             public boolean onQueryTextSubmit(String query) {
                 // Creating fragment.
                 searchFragment = CategoryFragment.newInstance(
-                        "https://content.guardianapis.com/search?show-fields=headline%2Cthumbnail%2CbodyText&page=1&page-size=30&q="
-                                + query + "&api-key=f8bc1c2f-a416-4927-b866-b05b70de8f11", "");
+
+                                URL + query + QUERIES, "");
                 FragmentManager fragmentManager = getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.fragment_container, searchFragment);

@@ -40,6 +40,9 @@ public class DetailsFragment extends Fragment implements LoaderManager.LoaderCal
     public static final int THUMBNAIL_LOADER_ID = 2;
     private News mNewsDetails;
     private Cursor mCursor;
+    // This variable is used to know if certain news is in the database already and, if so,
+    // turn the toggle button on when the fragment is created. It is also used to not insert a news
+    // that is already in the database.
     private boolean mVariable;
     private ToggleButton readMeLaterButton;
     public static final String KEY_NEWS = "NEWS_KEY";
@@ -71,7 +74,7 @@ public class DetailsFragment extends Fragment implements LoaderManager.LoaderCal
         mHeadline = mNews.getHeadline();
         mBodyText = mNews.getBodyText();
         mWebUrl = mNews.getWebUrl();
-        // Declares loadManager
+        // Declares loadManager and initializes loaders.
         LoaderManager loaderManager = getLoaderManager();
         loaderManager.restartLoader(THUMBNAIL_LOADER_ID, null, this);
         loaderManager.initLoader(CURSOR_LOADER_ID, null, this);
@@ -157,6 +160,7 @@ public class DetailsFragment extends Fragment implements LoaderManager.LoaderCal
         }
     }
 
+    // Returns true only if this news is already in the database.
     public boolean getCursorData(Object data) {
         mCursor = (Cursor) data;
         // If table has rows.
@@ -209,6 +213,7 @@ public class DetailsFragment extends Fragment implements LoaderManager.LoaderCal
                 new String[]{(getArguments()).getString(KEY_ID)});
     }
 
+    // Inserting or deleting news depending on the change in the toggle button.
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         if (isChecked) {

@@ -71,6 +71,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         }
     }
 
+    // Interface implemented in the ReadMeLaterFragment and CategoryFragment.
     public interface CallBack {
         void onItemClick(int position);
     }

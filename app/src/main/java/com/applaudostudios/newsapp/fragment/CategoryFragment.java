@@ -98,7 +98,6 @@ public class CategoryFragment extends Fragment implements RecyclerViewAdapter.Ca
             loaderManager.restartLoader(NEWS_LOADER_ID, null, this);
 
         } else {
-
             View loadingIndicator = mView.findViewById(R.id.loading_indicator);
             loadingIndicator.setVisibility(View.GONE);
             loaderManager = getLoaderManager();
@@ -208,6 +207,7 @@ public class CategoryFragment extends Fragment implements RecyclerViewAdapter.Ca
         }
         return newsList;
     }
+
 
     @Override
     public void onLoaderReset(@NonNull Loader loader) {
